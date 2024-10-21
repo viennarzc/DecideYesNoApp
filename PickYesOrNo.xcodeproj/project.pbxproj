@@ -15,6 +15,11 @@
 		850454062CC09E9600885423 /* PickYesOrNoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454052CC09E9600885423 /* PickYesOrNoUITests.swift */; };
 		850454082CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */; };
 		850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454142CC1CAAB00885423 /* MainDecisionView.swift */; };
+		85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9D2CC4615400E187CE /* AuthService.swift */; };
+		85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9F2CC461AE00E187CE /* AppConfig.swift */; };
+		85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */; };
+		85CF274E2CC1E86300D8E831 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = 85CF274D2CC1E86300D8E831 /* Appwrite */; };
+		85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CF274F2CC1E9F700D8E831 /* AccountService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +51,12 @@
 		850454052CC09E9600885423 /* PickYesOrNoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickYesOrNoUITests.swift; sourceTree = "<group>"; };
 		850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickYesOrNoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		850454142CC1CAAB00885423 /* MainDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDecisionView.swift; sourceTree = "<group>"; };
+		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		85AA8B9D2CC4615400E187CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		85AA8B9F2CC461AE00E187CE /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionServiceProtocol.swift; sourceTree = "<group>"; };
+		85AA8BA52CC4E25700E187CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		85CF274F2CC1E9F700D8E831 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85CF274E2CC1E86300D8E831 /* Appwrite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +88,7 @@
 		850453DE2CC09E9300885423 = {
 			isa = PBXGroup;
 			children = (
+				855149E62CC703D700F50F21 /* Config.xcconfig */,
 				850453E92CC09E9400885423 /* PickYesOrNo */,
 				850453FA2CC09E9600885423 /* PickYesOrNoTests */,
 				850454042CC09E9600885423 /* PickYesOrNoUITests */,
@@ -96,8 +109,13 @@
 		850453E92CC09E9400885423 /* PickYesOrNo */ = {
 			isa = PBXGroup;
 			children = (
+				85AA8BA52CC4E25700E187CE /* Info.plist */,
 				850453EA2CC09E9400885423 /* PickYesOrNoApp.swift */,
 				850453EC2CC09E9400885423 /* ContentView.swift */,
+				85CF274F2CC1E9F700D8E831 /* AccountService.swift */,
+				85AA8B9F2CC461AE00E187CE /* AppConfig.swift */,
+				85AA8B9D2CC4615400E187CE /* AuthService.swift */,
+				85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */,
 				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
 				850453EE2CC09E9500885423 /* Assets.xcassets */,
 				850453F02CC09E9500885423 /* Preview Content */,
@@ -146,6 +164,9 @@
 			dependencies = (
 			);
 			name = PickYesOrNo;
+			packageProductDependencies = (
+				85CF274D2CC1E86300D8E831 /* Appwrite */,
+			);
 			productName = PickYesOrNo;
 			productReference = 850453E72CC09E9400885423 /* PickYesOrNo.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +239,9 @@
 				Base,
 			);
 			mainGroup = 850453DE2CC09E9300885423;
+			packageReferences = (
+				85CF274C2CC1E86300D8E831 /* XCRemoteSwiftPackageReference "sdk-for-apple" */,
+			);
 			productRefGroup = 850453E82CC09E9400885423 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -261,8 +285,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				850453ED2CC09E9400885423 /* ContentView.swift in Sources */,
+				85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */,
+				85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */,
+				85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */,
 				850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */,
 				850453EB2CC09E9400885423 /* PickYesOrNoApp.swift in Sources */,
+				85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +457,7 @@
 				DEVELOPMENT_TEAM = 6UWE2EP59T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PickYesOrNo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -458,6 +487,7 @@
 				DEVELOPMENT_TEAM = 6UWE2EP59T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PickYesOrNo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -592,6 +622,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		85CF274C2CC1E86300D8E831 /* XCRemoteSwiftPackageReference "sdk-for-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appwrite/sdk-for-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		85CF274D2CC1E86300D8E831 /* Appwrite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85CF274C2CC1E86300D8E831 /* XCRemoteSwiftPackageReference "sdk-for-apple" */;
+			productName = Appwrite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 850453DF2CC09E9300885423 /* Project object */;
 }

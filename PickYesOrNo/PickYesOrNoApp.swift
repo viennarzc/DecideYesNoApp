@@ -9,6 +9,13 @@ import SwiftUI
 
 @main
 struct PickYesOrNoApp: App {
+    
+    init() {
+        AppConfig.AppWrite.configure(
+            endpoint: "https://cloud.appwrite.io/v1",
+            allowSelfSigned: false
+        )
+    }
     var body: some Scene {
         WindowGroup {
             ContentView()

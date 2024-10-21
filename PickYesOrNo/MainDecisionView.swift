@@ -13,6 +13,19 @@ enum DecisionStatus: String {
     case undecided = "Undecided"
 }
 
+extension DecisionStatus {
+    var recordValue: Bool? {
+        switch self {
+        case .yes:
+            return true
+        case .no:
+            return false
+        case .undecided:
+            return nil
+        }
+    }
+}
+
 struct MainDecisionView: View {
     @State private var decision: Decision
     @State private var showingAddNoteSheet = false
@@ -22,59 +35,68 @@ struct MainDecisionView: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack(spacing: 20) {
-                GroupBox {
-                    Text(decision.title)
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .multilineTextAlignment(.center)
-                        .padding()
+        
+            ScrollView {
+                VStack(spacing: 20) {
+                    GroupBox {
+                        Text(decision.title)
+                            .font(.title)
+                            .fontWeight(.bold)
+                            .multilineTextAlignment(.center)
+                            .padding()
 
-                    HStack(spacing: 10) {
-                        DecisionButton(title: "Yes", isSelected: decision.status == .yes, color: .green) {
-                            updateDecision(.yes)
+                        HStack(spacing: 10) {
+                            DecisionButton(title: "Yes", isSelected: decision.status == .yes, color: .green) {
+                                updateDecision(.yes)
+                            }
+
+                            DecisionButton(title: "No", isSelected: decision.status == .no, color: .red) {
+                                updateDecision(.no)
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+
+                        DecisionButton(title: "Undecided", isSelected: decision.status == .undecided, color: .orange) {
+                            updateDecision(.undecided)
+                        }
+                    }
+                    .padding()
+
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Notes:")
+                            .font(.headline)
+
+                        if let latestNote = decision.notes.last {
+                            Text(latestNote.content)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                         }
 
-                        DecisionButton(title: "No", isSelected: decision.status == .no, color: .red) {
-                            updateDecision(.no)
+                        Button(action: { showingAddNoteSheet = true }) {
+                            Label("Add Note", systemImage: "square.and.pencil")
                         }
                     }
-                    .frame(maxWidth: .infinity)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
 
-                    DecisionButton(title: "Undecided", isSelected: decision.status == .undecided, color: .orange) {
-                        updateDecision(.undecided)
+                    Spacer()
+                }
+                .navigationTitle("Decision")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        NavigationLink(destination: DecisionHistoryView()) {
+                            Image(systemName: "clock")
+                        }
+                        Button("Edit") {
+                            // Action for Edit
+                        }
                     }
                 }
-                .padding()
-
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Notes:")
-                        .font(.headline)
-
-                    if let latestNote = decision.notes.last {
-                        Text(latestNote.content)
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                    }
-
-                    Button(action: { showingAddNoteSheet = true }) {
-                        Label("Add Note", systemImage: "square.and.pencil")
-                    }
+                .sheet(isPresented: $showingAddNoteSheet) {
+                    AddNoteView(decision: $decision)
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-
-                Spacer()
             }
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: NavigationLink(destination: DecisionHistoryView()) {
-                Image(systemName: "clock")
-            })
-            .sheet(isPresented: $showingAddNoteSheet) {
-                AddNoteView(decision: $decision)
-            }
-        }
     }
 
     private func updateDecision(_ newStatus: DecisionStatus) {
@@ -122,7 +144,7 @@ struct ImpactBadge: View {
 
 // Example Data Structures (you would define these properly in your model)
 struct Decision: Identifiable {
-    let id: UUID
+    let id: String
     let title: String
     var status: DecisionStatus
     var impacts: [Impact]
@@ -130,17 +152,24 @@ struct Decision: Identifiable {
     var lastUpdated: Date
 
     static var example: Decision {
-        Decision(id: UUID(), title: "Should I learn SwiftUI?", status: .undecided, impacts: [Impact(description: "Career Growth")], notes: [Note(content: "Seems promising for iOS development")], lastUpdated: Date())
+        Decision(
+            id: UUID().uuidString,
+            title: "Should I learn SwiftUI?",
+            status: .undecided,
+            impacts: [Impact(description: "Career Growth")],
+            notes: [Note(content: "Seems promising for iOS development")],
+            lastUpdated: Date()
+        )
     }
 }
 
 struct Impact: Identifiable {
-    let id = UUID()
+    let id = UUID().uuidString
     let description: String
 }
 
 struct Note: Identifiable {
-    let id = UUID()
+    let id = UUID().uuidString
     let content: String
 }
 
@@ -166,5 +195,7 @@ struct AddImpactView: View {
 }
 
 #Preview {
-    MainDecisionView(decision: Decision.example)
+    NavigationStack {
+        MainDecisionView(decision: Decision.example)
+    }
 }
