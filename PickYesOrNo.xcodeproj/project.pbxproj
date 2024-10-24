@@ -15,6 +15,7 @@
 		850454062CC09E9600885423 /* PickYesOrNoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454052CC09E9600885423 /* PickYesOrNoUITests.swift */; };
 		850454082CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */; };
 		850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454142CC1CAAB00885423 /* MainDecisionView.swift */; };
+		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
 		85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9D2CC4615400E187CE /* AuthService.swift */; };
 		85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9F2CC461AE00E187CE /* AppConfig.swift */; };
 		85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */; };
@@ -52,6 +53,7 @@
 		850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickYesOrNoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		850454142CC1CAAB00885423 /* MainDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDecisionView.swift; sourceTree = "<group>"; };
 		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
 		85AA8B9D2CC4615400E187CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		85AA8B9F2CC461AE00E187CE /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionServiceProtocol.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				85AA8B9D2CC4615400E187CE /* AuthService.swift */,
 				85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */,
 				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
+				855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */,
 				850453EE2CC09E9500885423 /* Assets.xcassets */,
 				850453F02CC09E9500885423 /* Preview Content */,
 			);
@@ -291,6 +294,7 @@
 				850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */,
 				850453EB2CC09E9400885423 /* PickYesOrNoApp.swift in Sources */,
 				85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */,
+				855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +333,7 @@
 /* Begin XCBuildConfiguration section */
 		850454092CC09E9600885423 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855149E62CC703D700F50F21 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -392,6 +397,7 @@
 		};
 		8504540A2CC09E9600885423 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855149E62CC703D700F50F21 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -448,6 +454,7 @@
 		};
 		8504540C2CC09E9600885423 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855149E62CC703D700F50F21 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -478,6 +485,7 @@
 		};
 		8504540D2CC09E9600885423 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855149E62CC703D700F50F21 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

@@ -55,6 +55,14 @@ class AuthService {
         return try await getCurrentUser()
     }
     
+    func createEmailVerification() async throws {
+        //TODO:
+    }
+    
+    func createEmailVerificationConfirmation(secret: String) async throws {
+        //TODO:
+    }
+    
     func getCurrentUser() async throws -> User {
         let appwriteUser = try await account.get()
         return User(id: appwriteUser.id, email: appwriteUser.email, name: appwriteUser.name)

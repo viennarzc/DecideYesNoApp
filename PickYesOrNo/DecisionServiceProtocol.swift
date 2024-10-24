@@ -7,6 +7,7 @@
 
 import Appwrite
 import Foundation
+import JSONCodable
 
 protocol DecisionServiceProtocol {
     func createDecision(userId: String, answer: Bool) async throws -> Decision
@@ -111,34 +112,15 @@ class DecisionService {
         }
     }
 
-    func getDecisionsForCurrentUser() async throws {
-        do {
-            let documentList = try await databases.listDocuments(
-                databaseId: databaseId,
-                collectionId: decisionsCollectionId,
-                queries: [
-                ]
-            )
-            debugPrint("document List total \(documentList.total)")
+    func getDecisionsForCurrentUser() async throws -> DecisionList {
+        let documentList = try await databases.listDocuments(
+            databaseId: databaseId,
+            collectionId: decisionsCollectionId,
+            queries: [] // we can add query - userId, though through the permissions in collection, the current user should only fetch what the user created
+        )
+        debugPrint("document List total \(documentList.total)")
 
-            var decisions: [DecisionModel?] = []
-            
-            for document in documentList.documents {
-                let jsonString = try? document.data.toJson()
-
-                guard let jsonData = jsonString?.data(using: .utf8) else {
-                    fatalError("Unable to convert string to data")
-                }
-
-                let model = try? JSONDecoder().decode(DecisionModel.self, from: jsonData)
-                decisions.append(model)
-            }
-
-            debugPrint("Result: ", decisions.compactMap { $0 })
-
-        } catch let error {
-            debugPrint("Error getting decisions: ", error.localizedDescription)
-        }
+        return try await mapToDecisionList(documentList)
     }
 
     func addNoteToDecision(decisionId: String, content: String) async throws {
@@ -148,12 +130,51 @@ class DecisionService {
             "createdAt": ISO8601DateFormatter().string(from: Date()),
         ]
 
-        let documet = try await databases.createDocument(
+        let document = try await databases.createDocument(
             databaseId: databaseId,
             collectionId: notesCollectionId,
             documentId: ID.unique(),
             data: noteData
         )
+    }
+
+    // MARK: - Error Handling
+
+    enum DecisionError: LocalizedError {
+        case invalidJsonData
+        case decodingFailed(Error)
+
+        var errorDescription: String? {
+            switch self {
+            case .invalidJsonData:
+                return "Failed to convert document data to JSON"
+            case let .decodingFailed(error):
+                return "Failed to decode decision model: \(error.localizedDescription)"
+            }
+        }
+    }
+
+    private func mapToDecisionList(_ documentList: DocumentList<[String: AnyCodable]>) async throws -> DecisionList {
+        let decisions = try documentList.documents.map { document -> DecisionModel in
+            // Convert document data to JSON string
+            let jsonString = try document.data.toJson()
+
+            guard let jsonData = jsonString.data(using: .utf8) else {
+                throw DecisionError.invalidJsonData
+            }
+
+            do {
+                let model = try JSONDecoder().decode(
+                    DecisionModel.self,
+                    from: jsonData
+                )
+                return model
+            } catch {
+                throw DecisionError.decodingFailed(error)
+            }
+        }
+
+        return DecisionList(total: documentList.total, documents: decisions)
     }
 }
 
@@ -191,7 +212,7 @@ struct DecisionHistory {
     let changedAt: Date
 }
 
-struct DecisionModel: Codable {
+struct DecisionModel: Identifiable, Codable {
     let id: String
     let title: String
 
@@ -218,23 +239,4 @@ struct DecisionModel: Codable {
 struct DecisionList: Codable {
     let total: Int
     let documents: [DecisionModel]
-
-    private enum CodingKeys: CodingKey {
-        case total
-        case documents
-    }
-
-    init(from decoder: any Decoder) throws {
-        let container: KeyedDecodingContainer<DecisionList.CodingKeys> = try decoder.container(keyedBy: DecisionList.CodingKeys.self)
-
-        total = try container.decode(Int.self, forKey: DecisionList.CodingKeys.total)
-        documents = try container.decode([DecisionModel].self, forKey: DecisionList.CodingKeys.documents)
-    }
-
-    func encode(to encoder: any Encoder) throws {
-        var container = encoder.container(keyedBy: DecisionList.CodingKeys.self)
-
-        try container.encode(total, forKey: DecisionList.CodingKeys.total)
-        try container.encode(documents, forKey: DecisionList.CodingKeys.documents)
-    }
 }

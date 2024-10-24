@@ -101,6 +101,19 @@ struct ContentView: View {
     @State private var password: String = ""
 
     var body: some View {
+        TabView {
+            homeContent().tabItem {
+                Label("Home", systemImage: "house")
+            }
+            
+            DecisionListMainView().tabItem {
+                Label("Decisions", systemImage: "list.triangle")
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func homeContent() -> some View {
         ScrollView {
             VStack(spacing: 32) {
                 Button {
