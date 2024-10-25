@@ -10,10 +10,10 @@ import SwiftUI
 class DecisionListMainViewModel: ObservableObject {
     private var authService: AuthService
     private var decService: DecisionService
-    
+
     @Published private(set) var decisions: DecisionList? = nil
-       @Published private(set) var isLoading = false
-    
+    @Published private(set) var isLoading = false
+
     init() {
         authService = AuthService(
             client: AppConfig.AppWrite.shared.client,
@@ -21,7 +21,7 @@ class DecisionListMainViewModel: ObservableObject {
                 userDefaultsManager: UserDefaultsManager()
             )
         )
-        
+
         decService = DecisionService(
             authService: authService,
             databaseId: AppConfig.AppWrite.shared.databaseID,
@@ -30,60 +30,63 @@ class DecisionListMainViewModel: ObservableObject {
             notesCollectionId: ""
         )
     }
-    
+
     @MainActor
     func getDecisions() async {
         let decisions = try? await decService.getDecisionsForCurrentUser()
         self.decisions = decisions
-        
     }
 }
 
 struct DecisionListMainView: View {
-    
     @StateObject private var viewModel = DecisionListMainViewModel()
     @Environment(\.colorScheme) var colorScheme
-       
-       var body: some View {
-           NavigationView {
-               ScrollView {
-                   if viewModel.isLoading {
-                       ProgressView()
-                           .frame(maxWidth: .infinity, maxHeight: .infinity)
-                           .padding(.top, 40)
-                   } else if let decisions = viewModel.decisions {
-                       LazyVStack(spacing: 12) {
-                           ForEach(decisions.documents) { decision in
-                               NavigationLink(
+    
+    @State private var isPresentingCreateDecisions: Bool = false
+
+    var body: some View {
+        NavigationView {
+            ScrollView {
+                if viewModel.isLoading {
+                    ProgressView()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding(.top, 40)
+                } else if let decisions = viewModel.decisions {
+                    LazyVStack(spacing: 12) {
+                        ForEach(decisions.documents) { decision in
+                            NavigationLink(
                                 destination: {
                                     MainDecisionView(decision: decision)
                                 }
-                               ) {
-                                   DecisionCard(decision: decision)
-                               }
-                           }
-                       }
-                       .padding(.horizontal)
-                   } else {
-                       EmptyStateView()
-                   }
-               }
-               .navigationTitle("Decisions")
-               .toolbar {
-                   ToolbarItem(placement: .primaryAction) {
-                       Button(action: {
-                           // Add new decision action
-                       }) {
-                           Image(systemName: "plus.circle.fill")
-                               .imageScale(.large)
-                       }
-                   }
-               }
-           }
-           .task {
-               await viewModel.getDecisions()
-           }
-       }
+                            ) {
+                                DecisionCard(decision: decision)
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                } else {
+                    EmptyStateView()
+                }
+            }
+            .navigationTitle("Decisions")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button(action: {
+                        isPresentingCreateDecisions = true
+                    }) {
+                        Image(systemName: "plus.circle.fill")
+                            .imageScale(.large)
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $isPresentingCreateDecisions, content: {
+            CreateDecisionView()
+        })
+        .task {
+            await viewModel.getDecisions()
+        }
+    }
 }
 
 #Preview {
@@ -93,21 +96,21 @@ struct DecisionListMainView: View {
 struct DecisionCard: View {
     let decision: DecisionModel
     @Environment(\.colorScheme) var colorScheme
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(decision.title)
                 .font(.headline)
                 .foregroundColor(.primary)
                 .lineLimit(2)
-            
+
             HStack {
                 StatusBadge(status: decision.answerDecisionStatus)
                 Spacer()
                 if let date = decision.createdAt {
                     Text(date.formatted(.relative(presentation: .named)))
                 }
-                
+
                 Text(Date.now.formatted())
                     .font(.caption)
                     .foregroundColor(.secondary)
@@ -125,7 +128,7 @@ struct DecisionCard: View {
 
 struct StatusBadge: View {
     let status: DecisionStatus
-    
+
     var body: some View {
         Text(status.rawValue)
             .font(.caption)
@@ -138,7 +141,7 @@ struct StatusBadge: View {
             )
             .foregroundColor(statusColor)
     }
-    
+
     private var statusColor: Color {
         switch status {
         case .yes:
@@ -157,10 +160,10 @@ struct EmptyStateView: View {
             Image(systemName: "square.and.pencil")
                 .font(.system(size: 50))
                 .foregroundColor(.secondary)
-            
+
             Text("No Decisions Yet")
                 .font(.headline)
-            
+
             Text("Tap + to add your first decision")
                 .font(.subheadline)
                 .foregroundColor(.secondary)

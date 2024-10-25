@@ -62,7 +62,7 @@ class ViewModel: ObservableObject {
     
     func createDecision() async {
         do {
-            try await decService.createDecision(answer: Bool.random())
+            try await decService.createDecision(title: "Random title", answer: Bool.random())
             
         } catch let error {
             debugPrint("Error create decision \(error.localizedDescription)")

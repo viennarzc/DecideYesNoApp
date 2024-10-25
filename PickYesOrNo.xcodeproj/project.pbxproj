@@ -22,6 +22,7 @@
 		855149F52CCB1C1F00F50F21 /* DecisionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F42CCB1C1F00F50F21 /* DecisionList.swift */; };
 		855149F72CCB1C2700F50F21 /* DecisionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F62CCB1C2700F50F21 /* DecisionHistory.swift */; };
 		855149F92CCB1C6C00F50F21 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */; };
+		855149FB2CCB4DE100F50F21 /* CreateDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149FA2CCB4DE100F50F21 /* CreateDecisionView.swift */; };
 		85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9D2CC4615400E187CE /* AuthService.swift */; };
 		85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9F2CC461AE00E187CE /* AppConfig.swift */; };
 		85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */; };
@@ -66,6 +67,7 @@
 		855149F42CCB1C1F00F50F21 /* DecisionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionList.swift; sourceTree = "<group>"; };
 		855149F62CCB1C2700F50F21 /* DecisionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistory.swift; sourceTree = "<group>"; };
 		855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		855149FA2CCB4DE100F50F21 /* CreateDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDecisionView.swift; sourceTree = "<group>"; };
 		85AA8B9D2CC4615400E187CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		85AA8B9F2CC461AE00E187CE /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionServiceProtocol.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				850453EC2CC09E9400885423 /* ContentView.swift */,
+				855149FA2CCB4DE100F50F21 /* CreateDecisionView.swift */,
 				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
 				855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */,
 			);
@@ -332,6 +335,7 @@
 				850453ED2CC09E9400885423 /* ContentView.swift in Sources */,
 				85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */,
 				85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */,
+				855149FB2CCB4DE100F50F21 /* CreateDecisionView.swift in Sources */,
 				855149F72CCB1C2700F50F21 /* DecisionHistory.swift in Sources */,
 				85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */,
 				850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */,

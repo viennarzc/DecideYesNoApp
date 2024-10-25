@@ -25,14 +25,14 @@ class DecisionService {
         self.notesCollectionId = notesCollectionId
     }
 
-    func createDecision(answer: Bool) async throws {
+    func createDecision(title: String, answer: Bool?) async throws {
         let currentUser = try await authService.getCurrentUser()
         let data: [String: Any] = [
             "userId": currentUser.id,
             "answer": answer,
             "createdAt": ISO8601DateFormatter().string(from: Date()),
             "lastUpdated": ISO8601DateFormatter().string(from: Date()),
-            "title": "Some title",
+            "title": title,
             "id": ID.unique(),
         ]
 
