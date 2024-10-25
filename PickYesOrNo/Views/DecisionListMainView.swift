@@ -55,7 +55,9 @@ struct DecisionListMainView: View {
                        LazyVStack(spacing: 12) {
                            ForEach(decisions.documents) { decision in
                                NavigationLink(
-                                destination: Text(decision.title)
+                                destination: {
+                                    MainDecisionView(decision: decision)
+                                }
                                ) {
                                    DecisionCard(decision: decision)
                                }

@@ -35,72 +35,65 @@ struct MainDecisionView: View {
     }
 
     var body: some View {
-        
-            ScrollView {
-                VStack(spacing: 20) {
-                    GroupBox {
-                        Text(decision.title)
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                            .padding()
+        ScrollView {
+            VStack(spacing: 20) {
+                GroupBox {
+                    Text(decision.title)
+                        .font(.title)
+                        .fontWeight(.bold)
+                        .multilineTextAlignment(.center)
+                        .padding()
 
-                        HStack(spacing: 10) {
-                            DecisionButton(
-                                title: "Yes",
-                                isSelected: decision.answerDecisionStatus == .yes,
-                                color: .green
-                            ) {
-                                updateDecision(.yes)
-                            }
-
-                            DecisionButton(title: "No", isSelected: decision.answerDecisionStatus == .no, color: .red) {
-                                updateDecision(.no)
-                            }
+                    HStack(spacing: 10) {
+                        DecisionButton(
+                            title: "Yes",
+                            isSelected: decision.answerDecisionStatus == .yes,
+                            color: .green
+                        ) {
+                            updateDecision(.yes)
                         }
-                        .frame(maxWidth: .infinity)
 
-                        DecisionButton(title: "Undecided", isSelected: decision.answerDecisionStatus == .undecided, color: .orange) {
-                            updateDecision(.undecided)
+                        DecisionButton(title: "No", isSelected: decision.answerDecisionStatus == .no, color: .red) {
+                            updateDecision(.no)
                         }
                     }
-                    .padding()
+                    .frame(maxWidth: .infinity)
 
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Notes:")
-                            .font(.headline)
-
-//                        if let latestNote = decision.notes.last {
-//                            Text(latestNote.content)
-//                                .font(.subheadline)
-//                                .foregroundColor(.secondary)
-//                        }
-
-                        Button(action: { showingAddNoteSheet = true }) {
-                            Label("Add Note", systemImage: "square.and.pencil")
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal)
-
-                    Spacer()
-                }
-                .navigationTitle("Decision")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        NavigationLink(destination: DecisionHistoryView()) {
-                            Image(systemName: "clock")
-                        }
-                        Button("Edit") {
-                            // Action for Edit
-                        }
+                    DecisionButton(title: "Undecided", isSelected: decision.answerDecisionStatus == .undecided, color: .orange) {
+                        updateDecision(.undecided)
                     }
                 }
-                .sheet(isPresented: $showingAddNoteSheet) {
-                    Text("Add Note")
+                .padding()
+
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Notes:")
+                        .font(.headline)
+
+                    Button(action: { showingAddNoteSheet = true }) {
+                        Label("Add Note", systemImage: "square.and.pencil")
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal)
+
+                Spacer()
+            }
+            .navigationTitle("Decision")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    NavigationLink(destination: DecisionHistoryView()) {
+                        Image(systemName: "clock")
+                    }
+                    Button("Edit") {
+                        // Action for Edit
+                    }
                 }
             }
+            .sheet(isPresented: $showingAddNoteSheet) {
+                Text("Add Note")
+            }
+        }
     }
 
     private func updateDecision(_ newStatus: DecisionStatus) {
