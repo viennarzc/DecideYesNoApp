@@ -27,10 +27,10 @@ extension DecisionStatus {
 }
 
 struct MainDecisionView: View {
-    @State private var decision: Decision
+    @State private var decision: DecisionModel
     @State private var showingAddNoteSheet = false
 
-    init(decision: Decision) {
+    init(decision: DecisionModel) {
         _decision = State(initialValue: decision)
     }
 
@@ -46,17 +46,21 @@ struct MainDecisionView: View {
                             .padding()
 
                         HStack(spacing: 10) {
-                            DecisionButton(title: "Yes", isSelected: decision.status == .yes, color: .green) {
+                            DecisionButton(
+                                title: "Yes",
+                                isSelected: decision.answerDecisionStatus == .yes,
+                                color: .green
+                            ) {
                                 updateDecision(.yes)
                             }
 
-                            DecisionButton(title: "No", isSelected: decision.status == .no, color: .red) {
+                            DecisionButton(title: "No", isSelected: decision.answerDecisionStatus == .no, color: .red) {
                                 updateDecision(.no)
                             }
                         }
                         .frame(maxWidth: .infinity)
 
-                        DecisionButton(title: "Undecided", isSelected: decision.status == .undecided, color: .orange) {
+                        DecisionButton(title: "Undecided", isSelected: decision.answerDecisionStatus == .undecided, color: .orange) {
                             updateDecision(.undecided)
                         }
                     }
@@ -66,11 +70,11 @@ struct MainDecisionView: View {
                         Text("Notes:")
                             .font(.headline)
 
-                        if let latestNote = decision.notes.last {
-                            Text(latestNote.content)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                        }
+//                        if let latestNote = decision.notes.last {
+//                            Text(latestNote.content)
+//                                .font(.subheadline)
+//                                .foregroundColor(.secondary)
+//                        }
 
                         Button(action: { showingAddNoteSheet = true }) {
                             Label("Add Note", systemImage: "square.and.pencil")
@@ -94,14 +98,14 @@ struct MainDecisionView: View {
                     }
                 }
                 .sheet(isPresented: $showingAddNoteSheet) {
-                    AddNoteView(decision: $decision)
+                    Text("Add Note")
                 }
             }
     }
 
     private func updateDecision(_ newStatus: DecisionStatus) {
-        decision.status = newStatus
-        decision.lastUpdated = Date()
+//        decision.answer = newStatus.recordValue
+//        decision.lastUpdated = Date()
         // Here you would also call a function to update the decision in the backend
     }
 }
@@ -142,27 +146,6 @@ struct ImpactBadge: View {
     }
 }
 
-// Example Data Structures (you would define these properly in your model)
-struct Decision: Identifiable {
-    let id: String
-    let title: String
-    var status: DecisionStatus
-    var impacts: [Impact]
-    var notes: [Note]
-    var lastUpdated: Date
-
-    static var example: Decision {
-        Decision(
-            id: UUID().uuidString,
-            title: "Should I learn SwiftUI?",
-            status: .undecided,
-            impacts: [Impact(description: "Career Growth")],
-            notes: [Note(content: "Seems promising for iOS development")],
-            lastUpdated: Date()
-        )
-    }
-}
-
 struct Impact: Identifiable {
     let id = UUID().uuidString
     let description: String
@@ -180,22 +163,18 @@ struct DecisionHistoryView: View {
     }
 }
 
-struct AddNoteView: View {
-    @Binding var decision: Decision
-    var body: some View {
-        Text("Add Note")
-    }
-}
-
-struct AddImpactView: View {
-    @Binding var decision: Decision
-    var body: some View {
-        Text("Add Impact")
-    }
-}
-
 #Preview {
     NavigationStack {
-        MainDecisionView(decision: Decision.example)
+        MainDecisionView(decision: DecisionModel.example)
+    }
+}
+
+extension DecisionModel {
+    static var example: DecisionModel {
+        DecisionModel(
+            id: UUID().uuidString,
+            title: "Example Title",
+            createdAtString: Date.now.formatted()
+        )
     }
 }

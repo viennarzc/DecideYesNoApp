@@ -94,7 +94,6 @@ class AuthService {
        }
 }
 
-
 enum AuthError: Error {
     case userIdNotFound
 }

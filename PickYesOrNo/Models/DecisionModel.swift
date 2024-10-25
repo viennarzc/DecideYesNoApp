@@ -1,57 +1,20 @@
 //
-//  DecisionServiceProtocol.swift
+//  DecisionModel.swift
 //  PickYesOrNo
 //
-//  Created by Viennarz Curtiz on 10/20/24.
+//  Created by Viennarz Curtiz on 10/25/24.
 //
-
-import Appwrite
 import Foundation
-import JSONCodable
-
-protocol DecisionServiceProtocol {
-    func createDecision(userId: String, answer: Bool) async throws -> Decision
-    func updateDecision(id: String, newAnswer: Bool) async throws -> Decision
-    func getDecision(id: String) async throws -> Decision
-    func getDecisionsForUser(userId: String) async throws -> [Decision]
-    func addNoteToDecision(decisionId: String, content: String) async throws -> Note
-}
-
-enum DecisionError: Error {
-    case userNotLoggedIn
-}
-
-// Repository protocols (to be implemented with actual data storage logic)
-protocol DecisionRepositoryProtocol {
-    func create(_ decision: Decision) async throws -> Decision
-    func update(_ decision: Decision) async throws -> Decision
-    func get(id: String) async throws -> Decision
-    func getForUser(userId: String) async throws -> [Decision]
-}
-
-protocol DecisionHistoryRepositoryProtocol {
-    func create(_ history: DecisionHistory) async throws -> DecisionHistory
-}
-
-protocol NoteRepositoryProtocol {
-    func create(_ note: Note) async throws -> Note
-}
-
-protocol UserServiceProtocol {
-    func isUserLoggedIn(userId: String) async throws -> Bool
-}
-
-import Foundation
-
-struct DecisionHistory {
-    let id: String
-    let decisionId: String
-    let previousAnswer: Bool
-    let newAnswer: Bool
-    let changedAt: Date
-}
 
 struct DecisionModel: Identifiable, Decodable {
+    internal init(id: String, title: String, createdAtString: String, lastUpdatedString: String? = nil, answer: Bool? = nil) {
+        self.id = id
+        self.title = title
+        self.createdAtString = createdAtString
+        self.lastUpdatedString = lastUpdatedString
+        self.answer = answer
+    }
+    
     let id: String
     let title: String
     let createdAtString: String
@@ -103,9 +66,4 @@ struct DecisionModel: Identifiable, Decodable {
             .decode(String.self, forKey: .lastUpdated)
         answer = try container.decodeIfPresent(Bool.self, forKey: .answer)
     }
-}
-
-struct DecisionList: Decodable {
-    let total: Int
-    let documents: [DecisionModel]
 }

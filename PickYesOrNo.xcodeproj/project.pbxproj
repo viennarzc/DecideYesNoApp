@@ -17,6 +17,11 @@
 		850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454142CC1CAAB00885423 /* MainDecisionView.swift */; };
 		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
 		855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149EB2CCB102A00F50F21 /* DecisionService.swift */; };
+		855149F12CCB1BE700F50F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F02CCB1BE700F50F21 /* User.swift */; };
+		855149F32CCB1C1000F50F21 /* DecisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F22CCB1C1000F50F21 /* DecisionModel.swift */; };
+		855149F52CCB1C1F00F50F21 /* DecisionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F42CCB1C1F00F50F21 /* DecisionList.swift */; };
+		855149F72CCB1C2700F50F21 /* DecisionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F62CCB1C2700F50F21 /* DecisionHistory.swift */; };
+		855149F92CCB1C6C00F50F21 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */; };
 		85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9D2CC4615400E187CE /* AuthService.swift */; };
 		85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9F2CC461AE00E187CE /* AppConfig.swift */; };
 		85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */; };
@@ -56,6 +61,11 @@
 		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
 		855149EB2CCB102A00F50F21 /* DecisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionService.swift; sourceTree = "<group>"; };
+		855149F02CCB1BE700F50F21 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		855149F22CCB1C1000F50F21 /* DecisionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionModel.swift; sourceTree = "<group>"; };
+		855149F42CCB1C1F00F50F21 /* DecisionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionList.swift; sourceTree = "<group>"; };
+		855149F62CCB1C2700F50F21 /* DecisionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistory.swift; sourceTree = "<group>"; };
+		855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		85AA8B9D2CC4615400E187CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		85AA8B9F2CC461AE00E187CE /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionServiceProtocol.swift; sourceTree = "<group>"; };
@@ -115,14 +125,10 @@
 			children = (
 				85AA8BA52CC4E25700E187CE /* Info.plist */,
 				850453EA2CC09E9400885423 /* PickYesOrNoApp.swift */,
-				850453EC2CC09E9400885423 /* ContentView.swift */,
-				85CF274F2CC1E9F700D8E831 /* AccountService.swift */,
+				855149ED2CCB1B9200F50F21 /* Views */,
+				855149EE2CCB1BB100F50F21 /* Services */,
 				85AA8B9F2CC461AE00E187CE /* AppConfig.swift */,
-				85AA8B9D2CC4615400E187CE /* AuthService.swift */,
-				85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */,
-				855149EB2CCB102A00F50F21 /* DecisionService.swift */,
-				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
-				855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */,
+				855149EF2CCB1BD800F50F21 /* Models */,
 				850453EE2CC09E9500885423 /* Assets.xcassets */,
 				850453F02CC09E9500885423 /* Preview Content */,
 			);
@@ -152,6 +158,39 @@
 				850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */,
 			);
 			path = PickYesOrNoUITests;
+			sourceTree = "<group>";
+		};
+		855149ED2CCB1B9200F50F21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				850453EC2CC09E9400885423 /* ContentView.swift */,
+				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
+				855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		855149EE2CCB1BB100F50F21 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				85CF274F2CC1E9F700D8E831 /* AccountService.swift */,
+				855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */,
+				85AA8B9D2CC4615400E187CE /* AuthService.swift */,
+				85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */,
+				855149EB2CCB102A00F50F21 /* DecisionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		855149EF2CCB1BD800F50F21 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				855149F02CCB1BE700F50F21 /* User.swift */,
+				855149F22CCB1C1000F50F21 /* DecisionModel.swift */,
+				855149F62CCB1C2700F50F21 /* DecisionHistory.swift */,
+				855149F42CCB1C1F00F50F21 /* DecisionList.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,12 +332,17 @@
 				850453ED2CC09E9400885423 /* ContentView.swift in Sources */,
 				85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */,
 				85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */,
+				855149F72CCB1C2700F50F21 /* DecisionHistory.swift in Sources */,
 				85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */,
 				850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */,
+				855149F32CCB1C1000F50F21 /* DecisionModel.swift in Sources */,
 				850453EB2CC09E9400885423 /* PickYesOrNoApp.swift in Sources */,
 				855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */,
 				85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */,
+				855149F92CCB1C6C00F50F21 /* UserDefaultsManager.swift in Sources */,
+				855149F12CCB1BE700F50F21 /* User.swift in Sources */,
 				855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */,
+				855149F52CCB1C1F00F50F21 /* DecisionList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

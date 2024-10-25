@@ -16,12 +16,6 @@ enum AccountServiceError: LocalizedError {
     case loginFailed
 }
 
-struct User: Codable {
-    let id: String
-    let email: String
-    let name: String
-}
-
 // AccountService
 class AccountService {
     private let userDefaultsManager: UserDefaultsManager
@@ -56,33 +50,5 @@ class AccountService {
     
     func getCurrentSession() -> Session? {
         return currentSession
-    }
-}
-
-
-
-// UserDefaultsManager
-class UserDefaultsManager {
-    private let defaults = UserDefaults.standard
-    
-    func saveUserId(_ userId: String) {
-        defaults.set(userId, forKey: "userId")
-    }
-    
-    func saveUserEmail(_ email: String) {
-        defaults.set(email, forKey: "userEmail")
-    }
-    
-    func getUserId() -> String? {
-        return defaults.string(forKey: "userId")
-    }
-    
-    func getUserEmail() -> String? {
-        return defaults.string(forKey: "userEmail")
-    }
-    
-    func clearUserData() {
-        defaults.removeObject(forKey: "userId")
-        defaults.removeObject(forKey: "userEmail")
     }
 }
