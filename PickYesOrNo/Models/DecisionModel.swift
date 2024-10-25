@@ -14,7 +14,7 @@ struct DecisionModel: Identifiable, Decodable {
         self.lastUpdatedString = lastUpdatedString
         self.answer = answer
     }
-    
+
     let id: String
     let title: String
     let createdAtString: String
@@ -22,21 +22,10 @@ struct DecisionModel: Identifiable, Decodable {
     let answer: Bool?
 
     var createdAt: Date? {
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .custom { decoder -> Date in
-            let container = try decoder.singleValueContainer()
-            let dateString = try container.decode(String.self)
-
-            let formatter = ISO8601DateFormatter()
-            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-
-            if let date = formatter.date(from: dateString) {
-                return date
-            }
-            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format")
-        }
-
-        return nil
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" //ISO8601 Format
+        let date = dateFormatter.date(from: createdAtString)
+        return date
     }
 
     var answerDecisionStatus: DecisionStatus {

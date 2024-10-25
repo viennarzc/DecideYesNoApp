@@ -41,7 +41,7 @@ class DecisionListMainViewModel: ObservableObject {
 struct DecisionListMainView: View {
     @StateObject private var viewModel = DecisionListMainViewModel()
     @Environment(\.colorScheme) var colorScheme
-    
+
     @State private var isPresentingCreateDecisions: Bool = false
 
     var body: some View {
@@ -60,6 +60,14 @@ struct DecisionListMainView: View {
                                 }
                             ) {
                                 DecisionCard(decision: decision)
+                                    .tint(.black)
+                            }
+                            .contextMenu {
+                                Button(role: .destructive) {
+
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
                             }
                         }
                     }
@@ -108,13 +116,15 @@ struct DecisionCard: View {
                 StatusBadge(status: decision.answerDecisionStatus)
                 Spacer()
                 if let date = decision.createdAt {
-                    Text(date.formatted(.relative(presentation: .named)))
+                    Text(
+                        date.formatted(.dateTime.day(.twoDigits)
+                            .month(.wide)
+                            .weekday(.wide)
+                            .hour(.defaultDigits(amPM: .wide)))
+                    )
                 }
-
-                Text(Date.now.formatted())
-                    .font(.caption)
-                    .foregroundColor(.secondary)
             }
+            .foregroundStyle(.secondary)
         }
         .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
