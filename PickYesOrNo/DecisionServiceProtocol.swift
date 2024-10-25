@@ -17,167 +17,6 @@ protocol DecisionServiceProtocol {
     func addNoteToDecision(decisionId: String, content: String) async throws -> Note
 }
 
-class DecisionService {
-    private let databases: Databases
-    private let databaseId: String
-    private let decisionsCollectionId: String
-    private let decisionHistoryCollectionId: String
-    private let notesCollectionId: String
-    private let authService: AuthService
-
-    init(authService: AuthService, databaseId: String, decisionsCollectionId: String, decisionHistoryCollectionId: String, notesCollectionId: String) {
-        self.authService = authService
-        databases = Databases(authService.getClient())
-        self.databaseId = databaseId
-        self.decisionsCollectionId = decisionsCollectionId
-        self.decisionHistoryCollectionId = decisionHistoryCollectionId
-        self.notesCollectionId = notesCollectionId
-    }
-
-    func createDecision(answer: Bool) async throws {
-        let currentUser = try await authService.getCurrentUser()
-        let data: [String: Any] = [
-            "userId": currentUser.id,
-            "answer": answer,
-            "createdAt": ISO8601DateFormatter().string(from: Date()),
-            "lastUpdated": ISO8601DateFormatter().string(from: Date()),
-            "title": "Some title",
-            "id": ID.unique(),
-        ]
-
-        let document = try await databases.createDocument(
-            databaseId: databaseId,
-            collectionId: decisionsCollectionId,
-            documentId: ID.unique(),
-            data: data,
-            permissions: [
-                Permission.delete(Role.user(currentUser.id)),
-                Permission.write(Role.users()),
-                Permission.update(Role.user(currentUser.id)),
-                Permission.read(Role.user(currentUser.id)),
-            ] // optional
-        )
-        debugPrint("Document \(document.data)")
-    }
-
-    func updateDecision(id: String, newAnswer: Bool) async throws {
-        let decision = try await databases.getDocument(
-            databaseId: databaseId,
-            collectionId: decisionsCollectionId,
-            documentId: id
-        )
-
-        let oldAnswer = decision.data["answer"] as? Bool ?? false
-        let updateData: [String: Any] = [
-            "answer": newAnswer,
-            "lastUpdated": ISO8601DateFormatter().string(from: Date()),
-        ]
-
-        let updatedDecision = try await databases.updateDocument(
-            databaseId: databaseId,
-            collectionId: decisionsCollectionId,
-            documentId: id,
-            data: updateData
-        )
-
-        // Create decision history
-        let historyData: [String: Any] = [
-            "decisionId": id,
-            "previousAnswer": oldAnswer,
-            "newAnswer": newAnswer,
-            "changedAt": ISO8601DateFormatter().string(from: Date()),
-        ]
-
-        let document = try await databases.createDocument(
-            databaseId: databaseId,
-            collectionId: decisionHistoryCollectionId,
-            documentId: ID.unique(),
-            data: historyData
-        )
-        debugPrint("Document \(document)")
-    }
-
-    func getDecision(id: String) async throws {
-        do {
-            let document = try await databases.getDocument(
-                databaseId: databaseId,
-                collectionId: decisionsCollectionId,
-                documentId: id
-            )
-
-            debugPrint("Document \(document.toMap())")
-
-        } catch let error {
-            debugPrint("Error: ", error.localizedDescription)
-        }
-    }
-
-    func getDecisionsForCurrentUser() async throws -> DecisionList {
-        let documentList = try await databases.listDocuments(
-            databaseId: databaseId,
-            collectionId: decisionsCollectionId,
-            queries: [] // we can add query - userId, though through the permissions in collection, the current user should only fetch what the user created
-        )
-        debugPrint("document List total \(documentList.total)")
-
-        return try await mapToDecisionList(documentList)
-    }
-
-    func addNoteToDecision(decisionId: String, content: String) async throws {
-        let noteData: [String: Any] = [
-            "decisionId": decisionId,
-            "content": content,
-            "createdAt": ISO8601DateFormatter().string(from: Date()),
-        ]
-
-        let document = try await databases.createDocument(
-            databaseId: databaseId,
-            collectionId: notesCollectionId,
-            documentId: ID.unique(),
-            data: noteData
-        )
-    }
-
-    // MARK: - Error Handling
-
-    enum DecisionError: LocalizedError {
-        case invalidJsonData
-        case decodingFailed(Error)
-
-        var errorDescription: String? {
-            switch self {
-            case .invalidJsonData:
-                return "Failed to convert document data to JSON"
-            case let .decodingFailed(error):
-                return "Failed to decode decision model: \(error.localizedDescription)"
-            }
-        }
-    }
-
-    private func mapToDecisionList(_ documentList: DocumentList<[String: AnyCodable]>) async throws -> DecisionList {
-        let decisions = try documentList.documents.map { document -> DecisionModel in
-            // Convert document data to JSON string
-            let jsonString = try document.data.toJson()
-
-            guard let jsonData = jsonString.data(using: .utf8) else {
-                throw DecisionError.invalidJsonData
-            }
-
-            do {
-                let model = try JSONDecoder().decode(
-                    DecisionModel.self,
-                    from: jsonData
-                )
-                return model
-            } catch {
-                throw DecisionError.decodingFailed(error)
-            }
-        }
-
-        return DecisionList(total: documentList.total, documents: decisions)
-    }
-}
-
 enum DecisionError: Error {
     case userNotLoggedIn
 }
@@ -212,13 +51,45 @@ struct DecisionHistory {
     let changedAt: Date
 }
 
-struct DecisionModel: Identifiable, Codable {
+struct DecisionModel: Identifiable, Decodable {
     let id: String
     let title: String
+    let createdAtString: String
+    let lastUpdatedString: String?
+    let answer: Bool?
+
+    var createdAt: Date? {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .custom { decoder -> Date in
+            let container = try decoder.singleValueContainer()
+            let dateString = try container.decode(String.self)
+
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+
+            if let date = formatter.date(from: dateString) {
+                return date
+            }
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format")
+        }
+
+        return nil
+    }
+
+    var answerDecisionStatus: DecisionStatus {
+        switch answer {
+        case .some(true): return .yes
+        case .some(false): return .no
+        case .none: return .undecided
+        }
+    }
 
     private enum CodingKeys: CodingKey {
         case id
         case title
+        case createdAt
+        case lastUpdated
+        case answer
     }
 
     init(from decoder: any Decoder) throws {
@@ -226,17 +97,15 @@ struct DecisionModel: Identifiable, Codable {
 
         id = try container.decode(String.self, forKey: DecisionModel.CodingKeys.id)
         title = try container.decode(String.self, forKey: DecisionModel.CodingKeys.title)
-    }
-
-    func encode(to encoder: any Encoder) throws {
-        var container: KeyedEncodingContainer<DecisionModel.CodingKeys> = encoder.container(keyedBy: DecisionModel.CodingKeys.self)
-
-        try container.encode(id, forKey: DecisionModel.CodingKeys.id)
-        try container.encode(title, forKey: DecisionModel.CodingKeys.title)
+        createdAtString = try container
+            .decode(String.self, forKey: .createdAt)
+        lastUpdatedString = try container
+            .decode(String.self, forKey: .lastUpdated)
+        answer = try container.decodeIfPresent(Bool.self, forKey: .answer)
     }
 }
 
-struct DecisionList: Codable {
+struct DecisionList: Decodable {
     let total: Int
     let documents: [DecisionModel]
 }

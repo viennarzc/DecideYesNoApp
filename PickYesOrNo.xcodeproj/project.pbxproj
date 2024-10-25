@@ -16,6 +16,7 @@
 		850454082CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */; };
 		850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454142CC1CAAB00885423 /* MainDecisionView.swift */; };
 		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
+		855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149EB2CCB102A00F50F21 /* DecisionService.swift */; };
 		85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9D2CC4615400E187CE /* AuthService.swift */; };
 		85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9F2CC461AE00E187CE /* AppConfig.swift */; };
 		85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */; };
@@ -54,6 +55,7 @@
 		850454142CC1CAAB00885423 /* MainDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDecisionView.swift; sourceTree = "<group>"; };
 		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
+		855149EB2CCB102A00F50F21 /* DecisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionService.swift; sourceTree = "<group>"; };
 		85AA8B9D2CC4615400E187CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		85AA8B9F2CC461AE00E187CE /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionServiceProtocol.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				85AA8B9F2CC461AE00E187CE /* AppConfig.swift */,
 				85AA8B9D2CC4615400E187CE /* AuthService.swift */,
 				85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */,
+				855149EB2CCB102A00F50F21 /* DecisionService.swift */,
 				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
 				855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */,
 				850453EE2CC09E9500885423 /* Assets.xcassets */,
@@ -293,6 +296,7 @@
 				85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */,
 				850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */,
 				850453EB2CC09E9400885423 /* PickYesOrNoApp.swift in Sources */,
+				855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */,
 				85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */,
 				855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */,
 			);
