@@ -14,6 +14,15 @@ class DecisionListMainViewModel: ObservableObject {
     @Published private(set) var decisions: DecisionList? = nil
     @Published private(set) var isLoading = false
 
+    enum DataState {
+        case isFetching
+        case populated
+        case error
+        case empty
+    }
+
+    @Published private(set) var dataState: DataState = .isFetching
+
     init() {
         authService = AuthService(
             client: AppConfig.AppWrite.shared.client,
@@ -33,8 +42,23 @@ class DecisionListMainViewModel: ObservableObject {
 
     @MainActor
     func getDecisions() async {
+        isLoading = true
         let decisions = try? await decService.getDecisionsForCurrentUser()
         self.decisions = decisions
+
+        if let decisions = decisions {
+            dataState = decisions.documents.isEmpty ? .empty : .populated
+        } else {
+            dataState = .empty
+        }
+
+        isLoading = false
+    }
+
+    @MainActor
+    func getSession() async -> Bool? {
+        let session = try? await authService.getSession()
+        return session?.current ?? false
     }
 }
 
@@ -43,37 +67,63 @@ struct DecisionListMainView: View {
     @Environment(\.colorScheme) var colorScheme
 
     @State private var isPresentingCreateDecisions: Bool = false
+    @State private var hasSession: Bool = false
+    @State private var isPresentingLoginView: Bool = false
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
-                if viewModel.isLoading {
+                switch viewModel.dataState {
+                case .isFetching:
                     ProgressView()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .padding(.top, 40)
-                } else if let decisions = viewModel.decisions {
-                    LazyVStack(spacing: 12) {
-                        ForEach(decisions.documents) { decision in
-                            NavigationLink(
-                                destination: {
-                                    MainDecisionView(decision: decision)
-                                }
-                            ) {
-                                DecisionCard(decision: decision)
-                                    .tint(.black)
-                            }
-                            .contextMenu {
-                                Button(role: .destructive) {
 
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
+                case .populated:
+
+                    if let decisions = viewModel.decisions {
+                        LazyVStack(spacing: 12) {
+                            ForEach(decisions.documents) { decision in
+                                NavigationLink(
+                                    destination: {
+                                        MainDecisionView(decision: decision)
+                                    }
+                                ) {
+                                    DecisionCard(decision: decision)
+                                        .tint(.black)
+                                }
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
                                 }
                             }
                         }
+                        .padding(.horizontal)
                     }
-                    .padding(.horizontal)
-                } else {
-                    EmptyStateView()
+                case .error:
+                    Text("Error")
+                case .empty:
+                    if hasSession {
+                        EmptyStateView()
+
+                    } else {
+                        ContentUnavailableView {
+                            Text("Login Required")
+                        } description: {
+                            Text("You must login to able to create, and see the list of decisions")
+                        } actions: {
+                            Button {
+                                isPresentingLoginView = true
+                            } label: {
+                                Text("Login")
+                            }
+
+                        }
+
+                        Text("You must log in")
+                    }
                 }
             }
             .navigationTitle("Decisions")
@@ -91,8 +141,20 @@ struct DecisionListMainView: View {
         .sheet(isPresented: $isPresentingCreateDecisions, content: {
             CreateDecisionView()
         })
+        .sheet(isPresented: $isPresentingLoginView, content: {
+            LoginView(onSuccessLogin: {
+                isPresentingLoginView = false
+                
+                Task {
+                    await viewModel.getDecisions()                    
+                }
+            })
+        })
         .task {
             await viewModel.getDecisions()
+        }
+        .task {
+            hasSession = await viewModel.getSession() ?? false
         }
     }
 }

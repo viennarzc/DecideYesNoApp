@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-
 class ViewModel: ObservableObject {
     private var authService: AuthService
     private var decService: DecisionService
-    
+
     init() {
         authService = AuthService(
             client: AppConfig.AppWrite.shared.client,
@@ -19,7 +18,7 @@ class ViewModel: ObservableObject {
                 userDefaultsManager: UserDefaultsManager()
             )
         )
-        
+
         decService = DecisionService(
             authService: authService,
             databaseId: AppConfig.AppWrite.shared.databaseID,
@@ -28,51 +27,49 @@ class ViewModel: ObservableObject {
             notesCollectionId: ""
         )
     }
-    
+
     func login(email: String, password: String) async {
-            
         guard let user = try? await authService.login(email: "vnrzc.developer@gmail.com", password: "pAssword123") else { return }
 
-            debugPrint("User \(user.email)")
+        debugPrint("User \(user.email)")
     }
+
     func login2(email: String, password: String) async {
-            
         guard let user = try? await authService.login(email: email, password: password) else { return }
 
-            debugPrint("User \(user.email)")
+        debugPrint("User \(user.email)")
     }
-    
+
     func createSession(code: String) async {
         guard let session = try? await authService.createSession(
             secret: code)
-                
+
         else { return }
-        
-        debugPrint("User session",session)
+
+        debugPrint("User session", session)
     }
-    
+
     func getDecisions() async {
         try? await decService.getDecisionsForCurrentUser()
-        
     }
-    
+
     func getDecision(id: String) async {
         try? await decService.getDecision(id: id)
     }
-    
+
     func createDecision() async {
         do {
             try await decService.createDecision(title: "Random title", answer: Bool.random())
-            
+
         } catch let error {
             debugPrint("Error create decision \(error.localizedDescription)")
         }
     }
-    
+
     func getSession() async {
         try? await authService.getSession()
     }
-    
+
     func logout() async {
         do {
             try await authService.logout()
@@ -80,7 +77,7 @@ class ViewModel: ObservableObject {
             debugPrint("Error when logout \(error.localizedDescription)")
         }
     }
-    
+
     func createAccount(email: String, password: String) async {
         do {
             let result = try await authService.onRegister(email, password)
@@ -92,11 +89,10 @@ class ViewModel: ObservableObject {
 }
 
 struct ContentView: View {
-   
     @StateObject private var vm = ViewModel()
     @State private var showingOTPView: Bool = false
     @State private var code: String = ""
-    
+
     @State private var email: String = ""
     @State private var password: String = ""
 
@@ -105,13 +101,13 @@ struct ContentView: View {
             homeContent().tabItem {
                 Label("Home", systemImage: "house")
             }
-            
+
             DecisionListMainView().tabItem {
                 Label("Decisions", systemImage: "list.triangle")
             }
         }
     }
-    
+
     @ViewBuilder
     private func homeContent() -> some View {
         ScrollView {
@@ -123,33 +119,33 @@ struct ContentView: View {
                             email: "vnrzc.developer@gmail.com",
                             password: "pAssword123"
                         )
-                        
+
                         showingOTPView = true
                     }
-                    
+
                 } label: {
                     Text("Login")
                 }
-                
+
                 Image(systemName: "globe")
                     .imageScale(.large)
                     .foregroundStyle(.tint)
                 Text("Hello, world!")
-                
+
                 Button {
                     Task {
                         await vm.getDecisions()
                     }
-                    
+
                 } label: {
                     Text("Get Decisions")
                 }
-                
+
                 Button {
                     Task {
                         await vm.createDecision()
                     }
-                    
+
                 } label: {
                     Text("Create decision")
                 }
@@ -161,13 +157,13 @@ struct ContentView: View {
                 } label: {
                     Text("Log out")
                 }
-                
+
                 GroupBox {
                     TextField("Email", text: $email)
                         .textContentType(.emailAddress)
-                        
+
                     TextField("Passwod", text: $password)
-                    
+
                     Button {
                         Task {
                             await vm.createAccount(email: email, password: password)
@@ -176,13 +172,13 @@ struct ContentView: View {
                         Text("Create account")
                     }
                 }
-                
+
                 GroupBox {
                     TextField("Email", text: $email)
                         .textContentType(.emailAddress)
-                        
+
                     TextField("Passwod", text: $password)
-                    
+
                     Button {
                         Task {
                             await vm.login2(email: email, password: password)
@@ -191,8 +187,6 @@ struct ContentView: View {
                         Text("Login account")
                     }
                 }
-                
-
             }
             .sheet(
                 isPresented: $showingOTPView,
@@ -200,7 +194,7 @@ struct ContentView: View {
                     NavigationStack {
                         VStack {
                             TextField("Code", text: $code)
-                            
+
                             Button {
                                 Task {
                                     await vm.createSession(code: code)

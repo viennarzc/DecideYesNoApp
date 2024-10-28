@@ -72,7 +72,7 @@ class AuthService {
         client
     }
     
-    func getSession() async throws {
+    func getSession() async throws -> Session {
         let account = Account(client)
 
         let session = try await account.getSession(
@@ -80,6 +80,8 @@ class AuthService {
         )
         
         debugPrint(session.current)
+        return session
+        
     }
     
     public func onRegister(
@@ -93,6 +95,7 @@ class AuthService {
            )
        }
 }
+
 
 enum AuthError: Error {
     case userIdNotFound
