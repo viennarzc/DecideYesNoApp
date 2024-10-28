@@ -105,6 +105,10 @@ struct ContentView: View {
             DecisionListMainView().tabItem {
                 Label("Decisions", systemImage: "list.triangle")
             }
+            
+            SettingsMainView().tabItem {
+                Label("Settings", systemImage: "gear")
+            }
         }
     }
 
