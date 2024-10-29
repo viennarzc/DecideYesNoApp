@@ -17,6 +17,7 @@ class HomeViewModel: ObservableObject {
     @Published var totalDecisions: Int = 0
     @Published var yesDecisions: Int = 0
     @Published var noDecisions: Int = 0
+    @Published var undecidedDecisions: Int = 0
     @Published var thisMonthDecisions: Int = 0
     @Published var isLoading: Bool = false
 
@@ -78,6 +79,9 @@ class HomeViewModel: ObservableObject {
         noDecisions = decisions
             .compactMap { $0.answer }
             .filter { !$0 }.count
+        
+        undecidedDecisions = decisions
+            .filter { $0.answerDecisionStatus == .undecided }.count
 
         let calendar = Calendar.current
         let thisMonth = calendar.component(.month, from: Date())

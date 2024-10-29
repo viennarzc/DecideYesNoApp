@@ -131,11 +131,12 @@ struct DecisionListMainView: View {
                                 isPresentingLoginView = true
                             } label: {
                                 Text("Login")
+                                    .fontWeight(.bold)
                             }
+                            .buttonBorderShape(.capsule)
+                            .buttonStyle(BorderedProminentButtonStyle())
 
                         }
-
-                        Text("You must log in")
                     }
                 }
             }

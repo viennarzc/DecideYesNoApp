@@ -40,6 +40,12 @@ struct HomeView: View {
                 StatCard(title: "No Decisions", value: "\(viewModel.noDecisions)")
                 StatCard(title: "This Month", value: "\(viewModel.thisMonthDecisions)")
             }
+            
+            StatCard(
+                title: "Undecided",
+                value: "\(viewModel.undecidedDecisions)"
+            )
+
         }
     }
     

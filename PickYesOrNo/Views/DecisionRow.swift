@@ -16,8 +16,10 @@ struct DecisionRow: View {
                 .frame(width: 12, height: 12)
             
             VStack(alignment: .leading, spacing: 4) {
+                Text(decision.title)
+                
                 if let date = decision.createdAt {
-                    Text(date.formatted())
+                    Text(date.formatted(date: .abbreviated, time: .shortened))
                         .font(.caption)
                         .foregroundColor(.secondary)
                     
@@ -39,7 +41,7 @@ struct DecisionRow: View {
     
     func color() -> Color {
         guard let answer = decision.answer else { return Color.orange }
-        
+         
         return answer ? Color.green : Color.red
     }
     
@@ -51,3 +53,6 @@ struct DecisionRow: View {
 }
 
 
+#Preview {
+    DecisionRow(decision: .example)
+}
