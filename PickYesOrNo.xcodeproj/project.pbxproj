@@ -16,6 +16,9 @@
 		850454082CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */; };
 		850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454142CC1CAAB00885423 /* MainDecisionView.swift */; };
 		8533E0D12CD050D200591B6B /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D02CD050D200591B6B /* SettingsMainView.swift */; };
+		8533E0D42CD0591D00591B6B /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D32CD0591D00591B6B /* FirstAppear.swift */; };
+		8533E0D82CD08BED00591B6B /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D72CD08BED00591B6B /* SignupView.swift */; };
+		8533E0DA2CD08DF100591B6B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D92CD08DF100591B6B /* AuthView.swift */; };
 		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
 		855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149EB2CCB102A00F50F21 /* DecisionService.swift */; };
 		855149F12CCB1BE700F50F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F02CCB1BE700F50F21 /* User.swift */; };
@@ -62,6 +65,9 @@
 		850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickYesOrNoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		850454142CC1CAAB00885423 /* MainDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDecisionView.swift; sourceTree = "<group>"; };
 		8533E0D02CD050D200591B6B /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
+		8533E0D32CD0591D00591B6B /* FirstAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppear.swift; sourceTree = "<group>"; };
+		8533E0D72CD08BED00591B6B /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		8533E0D92CD08DF100591B6B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
 		855149EB2CCB102A00F50F21 /* DecisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionService.swift; sourceTree = "<group>"; };
@@ -129,6 +135,7 @@
 		850453E92CC09E9400885423 /* PickYesOrNo */ = {
 			isa = PBXGroup;
 			children = (
+				8533E0D22CD0590A00591B6B /* ViewModifiers */,
 				85AA8BA52CC4E25700E187CE /* Info.plist */,
 				850453EA2CC09E9400885423 /* PickYesOrNoApp.swift */,
 				855149ED2CCB1B9200F50F21 /* Views */,
@@ -166,15 +173,25 @@
 			path = PickYesOrNoUITests;
 			sourceTree = "<group>";
 		};
+		8533E0D22CD0590A00591B6B /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				8533E0D32CD0591D00591B6B /* FirstAppear.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
 		855149ED2CCB1B9200F50F21 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				850453EC2CC09E9400885423 /* ContentView.swift */,
-				8533E0D02CD050D200591B6B /* SettingsMainView.swift */,
-				855149FC2CCBC93600F50F21 /* LoginView.swift */,
+				8533E0D92CD08DF100591B6B /* AuthView.swift */,
 				855149FA2CCB4DE100F50F21 /* CreateDecisionView.swift */,
-				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
 				855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */,
+				855149FC2CCBC93600F50F21 /* LoginView.swift */,
+				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
+				8533E0D02CD050D200591B6B /* SettingsMainView.swift */,
+				8533E0D72CD08BED00591B6B /* SignupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,13 +355,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8533E0D82CD08BED00591B6B /* SignupView.swift in Sources */,
 				850453ED2CC09E9400885423 /* ContentView.swift in Sources */,
 				85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */,
 				85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */,
 				855149FB2CCB4DE100F50F21 /* CreateDecisionView.swift in Sources */,
 				8533E0D12CD050D200591B6B /* SettingsMainView.swift in Sources */,
+				8533E0DA2CD08DF100591B6B /* AuthView.swift in Sources */,
 				855149F72CCB1C2700F50F21 /* DecisionHistory.swift in Sources */,
 				85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */,
+				8533E0D42CD0591D00591B6B /* FirstAppear.swift in Sources */,
 				850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */,
 				855149F32CCB1C1000F50F21 /* DecisionModel.swift in Sources */,
 				850453EB2CC09E9400885423 /* PickYesOrNoApp.swift in Sources */,

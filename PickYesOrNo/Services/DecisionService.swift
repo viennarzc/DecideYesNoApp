@@ -128,6 +128,26 @@ class DecisionService {
             data: noteData
         )
     }
+    
+    ///  Deletes a Decision
+    /// - Parameter id: Document ID of the decision
+    /// - Returns: Success Deletion
+    func deleteDecision(id: String) async -> Bool {
+
+        do {
+            let result = try await databases.deleteDocument(
+                databaseId: databaseId,
+                collectionId: decisionsCollectionId,
+                documentId: id
+            )
+            
+            return true
+            
+        } catch let error {
+            debugPrint(error.localizedDescription)
+            return false
+        }
+    }
 
     // MARK: - Error Handling
 

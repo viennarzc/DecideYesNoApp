@@ -60,6 +60,12 @@ class DecisionListMainViewModel: ObservableObject {
         let session = try? await authService.getSession()
         return session?.current ?? false
     }
+    
+    func deleteDecision(id: String) async -> Bool {
+        let result = await decService.deleteDecision(id: id)
+        
+        return result
+    }
 }
 
 struct DecisionListMainView: View {
@@ -94,6 +100,13 @@ struct DecisionListMainView: View {
                                 }
                                 .contextMenu {
                                     Button(role: .destructive) {
+                                        Task {
+                                            await viewModel
+                                                .deleteDecision(id: decision.id)
+                                            
+                                            await viewModel.getDecisions()
+                                        }
+                                        
                                     } label: {
                                         Label("Delete", systemImage: "trash")
                                     }
@@ -146,7 +159,7 @@ struct DecisionListMainView: View {
                 isPresentingLoginView = false
                 
                 Task {
-                    await viewModel.getDecisions()                    
+                    await viewModel.getDecisions()
                 }
             })
         })

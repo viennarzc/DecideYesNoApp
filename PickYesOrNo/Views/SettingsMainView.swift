@@ -39,10 +39,13 @@ struct SettingsMainView: View {
                 }
             }
             .navigationTitle("Settings")
-            .task {
-                hasActiveSession = await viewModel.getSession() ?? false
-                await viewModel.getCurrentUser()
-            }
+            .onFirstAppear({
+                Task {
+                    hasActiveSession = await viewModel.getSession() ?? false
+                    await viewModel.getCurrentUser()
+                    
+                }
+            })
             .sheet(isPresented: $isPresentingLoginView, content: {
                 LoginView(onSuccessLogin: {
                     isPresentingLoginView = false

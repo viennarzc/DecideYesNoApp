@@ -15,7 +15,7 @@ struct DecisionModel: Identifiable, Decodable {
         self.answer = answer
     }
 
-    let id: String
+    let id: String //document id
     let title: String
     let createdAtString: String
     let lastUpdatedString: String?
@@ -36,8 +36,8 @@ struct DecisionModel: Identifiable, Decodable {
         }
     }
 
-    private enum CodingKeys: CodingKey {
-        case id
+    private enum CodingKeys: String, CodingKey {
+        case id = "$id"
         case title
         case createdAt
         case lastUpdated
