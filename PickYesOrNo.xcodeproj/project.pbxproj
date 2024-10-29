@@ -19,6 +19,10 @@
 		8533E0D42CD0591D00591B6B /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D32CD0591D00591B6B /* FirstAppear.swift */; };
 		8533E0D82CD08BED00591B6B /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D72CD08BED00591B6B /* SignupView.swift */; };
 		8533E0DA2CD08DF100591B6B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D92CD08DF100591B6B /* AuthView.swift */; };
+		8533E0DC2CD0E16400591B6B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0DB2CD0E16400591B6B /* HomeView.swift */; };
+		8533E0DE2CD0E18100591B6B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */; };
+		8533E0E02CD0E19700591B6B /* DecisionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0DF2CD0E19700591B6B /* DecisionRow.swift */; };
+		8533E0E22CD0E1A700591B6B /* StatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E12CD0E1A700591B6B /* StatCard.swift */; };
 		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
 		855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149EB2CCB102A00F50F21 /* DecisionService.swift */; };
 		855149F12CCB1BE700F50F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F02CCB1BE700F50F21 /* User.swift */; };
@@ -68,6 +72,10 @@
 		8533E0D32CD0591D00591B6B /* FirstAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppear.swift; sourceTree = "<group>"; };
 		8533E0D72CD08BED00591B6B /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		8533E0D92CD08DF100591B6B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		8533E0DB2CD0E16400591B6B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8533E0DF2CD0E19700591B6B /* DecisionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionRow.swift; sourceTree = "<group>"; };
+		8533E0E12CD0E1A700591B6B /* StatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCard.swift; sourceTree = "<group>"; };
 		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
 		855149EB2CCB102A00F50F21 /* DecisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionService.swift; sourceTree = "<group>"; };
@@ -185,6 +193,10 @@
 			isa = PBXGroup;
 			children = (
 				850453EC2CC09E9400885423 /* ContentView.swift */,
+				8533E0DB2CD0E16400591B6B /* HomeView.swift */,
+				8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */,
+				8533E0DF2CD0E19700591B6B /* DecisionRow.swift */,
+				8533E0E12CD0E1A700591B6B /* StatCard.swift */,
 				8533E0D92CD08DF100591B6B /* AuthView.swift */,
 				855149FA2CCB4DE100F50F21 /* CreateDecisionView.swift */,
 				855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */,
@@ -356,9 +368,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8533E0D82CD08BED00591B6B /* SignupView.swift in Sources */,
+				8533E0DE2CD0E18100591B6B /* HomeViewModel.swift in Sources */,
 				850453ED2CC09E9400885423 /* ContentView.swift in Sources */,
 				85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */,
 				85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */,
+				8533E0E02CD0E19700591B6B /* DecisionRow.swift in Sources */,
 				855149FB2CCB4DE100F50F21 /* CreateDecisionView.swift in Sources */,
 				8533E0D12CD050D200591B6B /* SettingsMainView.swift in Sources */,
 				8533E0DA2CD08DF100591B6B /* AuthView.swift in Sources */,
@@ -368,8 +382,10 @@
 				850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */,
 				855149F32CCB1C1000F50F21 /* DecisionModel.swift in Sources */,
 				850453EB2CC09E9400885423 /* PickYesOrNoApp.swift in Sources */,
+				8533E0E22CD0E1A700591B6B /* StatCard.swift in Sources */,
 				855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */,
 				85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */,
+				8533E0DC2CD0E16400591B6B /* HomeView.swift in Sources */,
 				855149F92CCB1C6C00F50F21 /* UserDefaultsManager.swift in Sources */,
 				855149F12CCB1BE700F50F21 /* User.swift in Sources */,
 				855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */,

@@ -32,8 +32,7 @@ class DecisionService {
             "answer": answer,
             "createdAt": ISO8601DateFormatter().string(from: Date()),
             "lastUpdated": ISO8601DateFormatter().string(from: Date()),
-            "title": title,
-            "id": ID.unique(),
+            "title": title
         ]
 
         let document = try await databases.createDocument(

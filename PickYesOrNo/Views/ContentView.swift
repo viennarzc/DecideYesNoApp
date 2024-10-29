@@ -98,7 +98,7 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            homeContent().tabItem {
+            HomeView().tabItem {
                 Label("Home", systemImage: "house")
             }
 
@@ -112,111 +112,6 @@ struct ContentView: View {
         }
     }
 
-    @ViewBuilder
-    private func homeContent() -> some View {
-        ScrollView {
-            VStack(spacing: 32) {
-                Button {
-                    // Login
-                    Task {
-                        let result = await vm.login(
-                            email: "vnrzc.developer@gmail.com",
-                            password: "pAssword123"
-                        )
-
-                        showingOTPView = true
-                    }
-
-                } label: {
-                    Text("Login")
-                }
-
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundStyle(.tint)
-                Text("Hello, world!")
-
-                Button {
-                    Task {
-                        await vm.getDecisions()
-                    }
-
-                } label: {
-                    Text("Get Decisions")
-                }
-
-                Button {
-                    Task {
-                        await vm.createDecision()
-                    }
-
-                } label: {
-                    Text("Create decision")
-                }
-
-                Button {
-                    Task {
-                        await vm.logout()
-                    }
-                } label: {
-                    Text("Log out")
-                }
-
-                GroupBox {
-                    TextField("Email", text: $email)
-                        .textContentType(.emailAddress)
-
-                    TextField("Passwod", text: $password)
-
-                    Button {
-                        Task {
-                            await vm.createAccount(email: email, password: password)
-                        }
-                    } label: {
-                        Text("Create account")
-                    }
-                }
-
-                GroupBox {
-                    TextField("Email", text: $email)
-                        .textContentType(.emailAddress)
-
-                    TextField("Passwod", text: $password)
-
-                    Button {
-                        Task {
-                            await vm.login2(email: email, password: password)
-                        }
-                    } label: {
-                        Text("Login account")
-                    }
-                }
-            }
-            .sheet(
-                isPresented: $showingOTPView,
-                content: {
-                    NavigationStack {
-                        VStack {
-                            TextField("Code", text: $code)
-
-                            Button {
-                                Task {
-                                    await vm.createSession(code: code)
-                                }
-                            } label: {
-                                Text("Confirm")
-                            }
-                            .disabled(code.isEmpty)
-                        }
-                        .padding()
-                    }
-                })
-            .padding()
-        }
-        .task {
-            await vm.getSession()
-        }
-    }
 }
 
 #Preview {
