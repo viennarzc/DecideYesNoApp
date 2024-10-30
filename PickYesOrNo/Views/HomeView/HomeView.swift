@@ -26,6 +26,9 @@ struct HomeView: View {
                 viewModel.fetchData()
             }
         }
+        .task {
+            await viewModel.updateLocalUser()
+        }
     }
     
     // MARK: - Stats Overview

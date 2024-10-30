@@ -12,6 +12,7 @@ import Foundation
 class HomeViewModel: ObservableObject {
     private var authService: AuthService
     private var decService: DecisionService
+    private let defaultsManager: UserDefaultsManager
 
     @Published var recentDecisions: [DecisionModel] = []
     @Published var totalDecisions: Int = 0
@@ -21,19 +22,29 @@ class HomeViewModel: ObservableObject {
     @Published var thisMonthDecisions: Int = 0
     @Published var isLoading: Bool = false
 
-    init() {
+    init(defaultsManager: UserDefaultsManager = UserDefaultsManager()) {
+        self.defaultsManager = defaultsManager
+        
         authService = AuthService(
             client: AppConfig.AppWrite.shared.client,
             accountService: AccountService(
-                userDefaultsManager: UserDefaultsManager()
+                userDefaultsManager: defaultsManager
             )
         )
 
         decService = DecisionService(
-            authService: authService,
+            client: AppConfig.AppWrite.shared.client,
             databaseId: AppConfig.AppWrite.shared.databaseID,
             decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID
         )
+    }
+    
+    func updateLocalUser() async {
+        guard let user = try? await authService.getCurrentUser() else { return }
+        
+        defaultsManager.saveUserId(user.id)
+        defaultsManager.saveUserEmail(user.email)
+        
     }
 
     func fetchData() {

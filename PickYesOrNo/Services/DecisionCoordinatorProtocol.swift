@@ -28,7 +28,7 @@ class DecisionCoordinator: DecisionCoordinatorProtocol {
         
         // Initialize independent services
         self.decisionService = DecisionService(
-            authService: authService,
+            client: client,
             databaseId: databaseId,
             decisionsCollectionId: decisionsCollectionId
         )

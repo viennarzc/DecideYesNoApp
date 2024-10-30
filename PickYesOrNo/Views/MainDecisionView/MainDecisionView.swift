@@ -67,17 +67,6 @@ struct MainDecisionView: View {
                 }
                 .padding()
 
-                VStack(alignment: .leading, spacing: 10) {
-                    Text("Notes:")
-                        .font(.headline)
-
-                    Button(action: { showingAddNoteSheet = true }) {
-                        Label("Add Note", systemImage: "square.and.pencil")
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal)
-
                 Spacer()
             }
             .navigationTitle("Decision")
@@ -91,13 +80,7 @@ struct MainDecisionView: View {
                     ) {
                         Image(systemName: "clock")
                     }
-                    Button("Edit") {
-                        // Action for Edit
-                    }
                 }
-            }
-            .sheet(isPresented: $showingAddNoteSheet) {
-                Text("Add Note")
             }
         }
     }

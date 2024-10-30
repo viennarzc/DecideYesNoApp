@@ -12,20 +12,20 @@ class DecisionService {
     private let databases: Databases
     private let databaseId: String
     private let decisionsCollectionId: String
-    private let authService: AuthService
 
     private let jsonDecoder: JSONDecoder
+    private let defaultsManager: UserDefaultsManager = UserDefaultsManager()
 
-    init(authService: AuthService, databaseId: String, decisionsCollectionId: String) {
-        self.authService = authService
-        databases = Databases(authService.getClient())
+    init(client: Client, databaseId: String, decisionsCollectionId: String) {
+        
+        databases = Databases(client)
         self.databaseId = databaseId
         self.decisionsCollectionId = decisionsCollectionId
         jsonDecoder = JSONDecoder()
     }
 
     func createDecision(title: String, answer: Bool?) async throws {
-        let currentUser = try await authService.getCurrentUser()
+        guard let userId = defaultsManager.getUserId() else { return }
 
         let decHistory: [String: Any] = [
             "newAnswer": answer,
@@ -33,7 +33,7 @@ class DecisionService {
         ]
 
         let data: [String: Any] = [
-            "userId": currentUser.id,
+            "userId": userId,
             "answer": answer,
             "createdAt": ISO8601DateFormatter().string(from: Date()),
             "lastUpdated": ISO8601DateFormatter().string(from: Date()),
@@ -47,10 +47,10 @@ class DecisionService {
             documentId: ID.unique(),
             data: data,
             permissions: [
-                Permission.delete(Role.user(currentUser.id)),
+                Permission.delete(Role.user(userId)),
                 Permission.write(Role.users()),
-                Permission.update(Role.user(currentUser.id)),
-                Permission.read(Role.user(currentUser.id)),
+                Permission.update(Role.user(userId)),
+                Permission.read(Role.user(userId)),
             ] // optional
         )
         debugPrint("Document \(document.data)")

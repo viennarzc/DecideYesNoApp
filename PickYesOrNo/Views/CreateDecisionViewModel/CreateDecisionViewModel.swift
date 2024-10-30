@@ -29,7 +29,7 @@ class CreateDecisionViewModel: ObservableObject {
         )
         
         decisionService = DecisionService(
-            authService: authService,
+            client: AppConfig.AppWrite.shared.client,
             databaseId: AppConfig.AppWrite.shared.databaseID,
             decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID
         )

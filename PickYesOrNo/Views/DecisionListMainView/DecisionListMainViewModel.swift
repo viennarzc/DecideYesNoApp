@@ -7,8 +7,8 @@
 import Foundation
 
 class DecisionListMainViewModel: ObservableObject {
-    private var authService: AuthService
-    private var decService: DecisionService
+    private let authService: AuthService
+    private let decService: DecisionService
 
     @Published private(set) var decisions: DecisionList? = nil
     @Published private(set) var isLoading = false
@@ -29,9 +29,8 @@ class DecisionListMainViewModel: ObservableObject {
                 userDefaultsManager: UserDefaultsManager()
             )
         )
-
         decService = DecisionService(
-            authService: authService,
+            client: AppConfig.AppWrite.shared.client,
             databaseId: AppConfig.AppWrite.shared.databaseID,
             decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID
         )

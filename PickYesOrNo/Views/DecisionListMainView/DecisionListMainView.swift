@@ -8,7 +8,6 @@
 import SwiftUI
 
 
-
 struct DecisionListMainView: View {
     @StateObject private var viewModel = DecisionListMainViewModel()
     @Environment(\.colorScheme) var colorScheme
