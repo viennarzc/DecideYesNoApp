@@ -8,16 +8,27 @@ import SwiftUI
 
 struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
-    
+
     var body: some View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 20) {
                     // Stats Overview
                     statsOverview
-                    
+
                     // Recent Decisions
                     recentDecisions
+
+                    Section {
+                        GroupBox {
+                            DecisionTimeAnalytics(decisions: viewModel.recentDecisions)
+                        }
+
+                    } header: {
+                        Text("Decision Time Patterns")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
                 }
                 .padding()
             }
@@ -30,34 +41,35 @@ struct HomeView: View {
             await viewModel.updateLocalUser()
         }
     }
-    
+
     // MARK: - Stats Overview
+
     private var statsOverview: some View {
         VStack(spacing: 16) {
             HStack {
                 StatCard(title: "Total Decisions", value: "\(viewModel.totalDecisions)")
                 StatCard(title: "Yes Decisions", value: "\(viewModel.yesDecisions)")
             }
-            
+
             HStack {
                 StatCard(title: "No Decisions", value: "\(viewModel.noDecisions)")
                 StatCard(title: "This Month", value: "\(viewModel.thisMonthDecisions)")
             }
-            
+
             StatCard(
                 title: "Undecided",
                 value: "\(viewModel.undecidedDecisions)"
             )
-
         }
     }
-    
+
     // MARK: - Recent Decisions
+
     private var recentDecisions: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("Recent Decisions")
                 .font(.headline)
-            
+
             if viewModel.isLoading {
                 ProgressView()
                     .frame(maxWidth: .infinity, minHeight: 100)
@@ -70,17 +82,17 @@ struct HomeView: View {
             }
         }
     }
-    
+
     private var emptyStateView: some View {
         VStack(spacing: 12) {
             Image(systemName: "square.and.pencil")
                 .font(.system(size: 40))
                 .foregroundColor(.gray)
-            
+
             Text("No decisions yet")
                 .font(.headline)
                 .foregroundColor(.gray)
-            
+
             Text("Start making decisions by tapping the + button")
                 .font(.subheadline)
                 .foregroundColor(.gray)
@@ -89,4 +101,3 @@ struct HomeView: View {
         .frame(maxWidth: .infinity, minHeight: 200)
     }
 }
-

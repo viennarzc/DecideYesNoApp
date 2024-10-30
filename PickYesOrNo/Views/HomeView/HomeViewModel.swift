@@ -15,6 +15,7 @@ class HomeViewModel: ObservableObject {
     private let defaultsManager: UserDefaultsManager
 
     @Published var recentDecisions: [DecisionModel] = []
+    @Published var allDecisions: [DecisionModel] = []
     @Published var totalDecisions: Int = 0
     @Published var yesDecisions: Int = 0
     @Published var noDecisions: Int = 0

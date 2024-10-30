@@ -152,7 +152,8 @@ extension DecisionModel {
         DecisionModel(
             id: UUID().uuidString,
             title: "Example Title",
-            createdAtString: Date.now.formatted()
+            createdAtString: Date.now.formatted(),
+            answer: true
         )
     }
 }
