@@ -28,23 +28,3 @@ struct DecisionHistoryModel: Decodable {
         case createdAtString = "$createdAt"
     }
 }
-
-struct DecisionHistoryList: Decodable {
-    let total: Int
-    let documents: [DecisionHistoryModel]
-}
-
-struct CreateDecisionHistoryForm {
-    let decisionId: String
-    let newAnswer: Bool?
-    
-    func toJson() -> [String: Any] {
-        return [
-            "decision": decisionId,
-            "newAnswer": newAnswer,
-            "createdAt": ISO8601DateFormatter().string(from: Date())
-        ]
-    }
-}
-
-

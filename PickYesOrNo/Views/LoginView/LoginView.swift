@@ -1,19 +1,19 @@
 //
-//  SignupView.swift
+//  LoginView.swift
 //  PickYesOrNo
 //
-//  Created by Viennarz Curtiz on 10/29/24.
+//  Created by Viennarz Curtiz on 10/25/24.
 //
 
 import SwiftUI
 
-struct SignupView: View {
+struct LoginView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
-    @StateObject private var viewModel: SignupViewModel = SignupViewModel()
+    @StateObject private var viewModel: LoginViewModel = LoginViewModel()
     
-    var onSignupSuccess: () -> Void
+    var onSuccessLogin: () -> Void
 
     var body: some View {
         Form {
@@ -39,19 +39,16 @@ struct SignupView: View {
 
             Button {
                 Task {
-                    let success = await viewModel.createAccount(
-                        email: email,
-                        password: password
-                    )
+                    let user = await viewModel.login(email: email, password: password)
                     
-                    if success {
-                        onSignupSuccess()
+                    if user != nil {
+                        onSuccessLogin()
                     }
                     
                 }
                 
             } label: {
-                Text("Create Account")
+                Text("Login")
                     .font(.body)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
@@ -72,30 +69,8 @@ struct SignupView: View {
 }
 
 #Preview {
-    SignupView(onSignupSuccess: { })
-}
-
-
-class SignupViewModel: ObservableObject {
-    private var authService: AuthService
-
-    init() {
-        authService = AuthService(
-            client: AppConfig.AppWrite.shared.client,
-            accountService: AccountService(
-                userDefaultsManager: UserDefaultsManager()
-            )
-        )
-    }
-
-    func createAccount(email: String, password: String) async -> Bool {
-        do {
-            let result = try await authService.onRegister(email, password)
-            debugPrint(result)
-            return true
-        } catch let error {
-            debugPrint(error.localizedDescription)
-            return false
-        }
+    NavigationStack {
+        LoginView(onSuccessLogin: {})
     }
 }
+

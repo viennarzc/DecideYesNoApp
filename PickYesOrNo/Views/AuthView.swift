@@ -61,7 +61,6 @@ struct AuthView: View {
                 
             }
         }
-//        .ignoresSafeArea(.all)
     }
 }
 

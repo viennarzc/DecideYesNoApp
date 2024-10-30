@@ -14,29 +14,31 @@ class DecisionService {
     private let decisionsCollectionId: String
     private let authService: AuthService
 
+    private let jsonDecoder: JSONDecoder
+
     init(authService: AuthService, databaseId: String, decisionsCollectionId: String) {
         self.authService = authService
         databases = Databases(authService.getClient())
         self.databaseId = databaseId
         self.decisionsCollectionId = decisionsCollectionId
+        jsonDecoder = JSONDecoder()
     }
 
     func createDecision(title: String, answer: Bool?) async throws {
         let currentUser = try await authService.getCurrentUser()
-        
-        
+
         let decHistory: [String: Any] = [
             "newAnswer": answer,
-            "createdAt": ISO8601DateFormatter().string(from: Date())
+            "createdAt": ISO8601DateFormatter().string(from: Date()),
         ]
-        
+
         let data: [String: Any] = [
             "userId": currentUser.id,
             "answer": answer,
             "createdAt": ISO8601DateFormatter().string(from: Date()),
             "lastUpdated": ISO8601DateFormatter().string(from: Date()),
             "title": title,
-            "decisionHistory": [decHistory]
+            "decisionHistory": [decHistory],
         ]
 
         let document = try await databases.createDocument(
@@ -74,7 +76,7 @@ class DecisionService {
         )
     }
 
-    func getDecision(id: String) async throws {
+    func getDecision(id: String) async throws -> DecisionModel? {
         do {
             let document = try await databases.getDocument(
                 databaseId: databaseId,
@@ -82,11 +84,20 @@ class DecisionService {
                 documentId: id
             )
 
-            debugPrint("Document \(document.toMap())")
+            debugPrint("Document \(document.data.toJson)")
+
+            let jsonString = try document.data.toJson()
+            guard let jsonData = jsonString.data(using: .utf8) else {
+                throw DecisionError.invalidJsonData
+            }
+            return try jsonDecoder
+                .decode(DecisionModel.self, from: jsonData)
 
         } catch let error {
             debugPrint("Error: ", error.localizedDescription)
         }
+
+        return nil
     }
 
     func getDecisionsForCurrentUser() async throws -> DecisionList {
@@ -100,35 +111,19 @@ class DecisionService {
         return try await mapToDecisionList(documentList)
     }
 
-    func addNoteToDecision(decisionId: String, content: String) async throws {
-//        let noteData: [String: Any] = [
-//            "decisionId": decisionId,
-//            "content": content,
-//            "createdAt": ISO8601DateFormatter().string(from: Date()),
-//        ]
-//
-//        let document = try await databases.createDocument(
-//            databaseId: databaseId,
-//            collectionId: notesCollectionId,
-//            documentId: ID.unique(),
-//            data: noteData
-//        )
-    }
-    
     ///  Deletes a Decision
     /// - Parameter id: Document ID of the decision
     /// - Returns: Success Deletion
     func deleteDecision(id: String) async -> Bool {
-
         do {
             let result = try await databases.deleteDocument(
                 databaseId: databaseId,
                 collectionId: decisionsCollectionId,
                 documentId: id
             )
-            
+
             return true
-            
+
         } catch let error {
             debugPrint(error.localizedDescription)
             return false

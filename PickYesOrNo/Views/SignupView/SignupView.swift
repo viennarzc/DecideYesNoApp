@@ -1,19 +1,19 @@
 //
-//  LoginView.swift
+//  SignupView.swift
 //  PickYesOrNo
 //
-//  Created by Viennarz Curtiz on 10/25/24.
+//  Created by Viennarz Curtiz on 10/29/24.
 //
 
 import SwiftUI
 
-struct LoginView: View {
+struct SignupView: View {
     @State private var email: String = ""
     @State private var password: String = ""
     
-    @StateObject private var viewModel: LoginViewModel = LoginViewModel()
+    @StateObject private var viewModel: SignupViewModel = SignupViewModel()
     
-    var onSuccessLogin: () -> Void
+    var onSignupSuccess: () -> Void
 
     var body: some View {
         Form {
@@ -39,16 +39,19 @@ struct LoginView: View {
 
             Button {
                 Task {
-                    let user = await viewModel.login(email: email, password: password)
+                    let success = await viewModel.createAccount(
+                        email: email,
+                        password: password
+                    )
                     
-                    if user != nil {
-                        onSuccessLogin()
+                    if success {
+                        onSignupSuccess()
                     }
                     
                 }
                 
             } label: {
-                Text("Login")
+                Text("Create Account")
                     .font(.body)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
@@ -69,32 +72,8 @@ struct LoginView: View {
 }
 
 #Preview {
-    NavigationStack {
-        LoginView(onSuccessLogin: {})
-    }
+    SignupView(onSignupSuccess: { })
 }
 
-class LoginViewModel: ObservableObject {
-    private var authService: AuthService
 
-    init() {
-        authService = AuthService(
-            client: AppConfig.AppWrite.shared.client,
-            accountService: AccountService(
-                userDefaultsManager: UserDefaultsManager()
-            )
-        )
-    }
 
-    func login(email: String, password: String) async -> User? {
-        do {
-            let user = try await authService.login(email: email, password: password)
-            debugPrint("User \(user.email)")
-            return user
-            
-        } catch let error {
-            debugPrint(error.localizedDescription)
-            return nil
-        }
-    }
-}

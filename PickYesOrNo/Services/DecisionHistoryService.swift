@@ -23,7 +23,7 @@ class DecisionHistoryService {
         self.databaseId = databaseId
         self.decisionHistoryCollectionId = decisionHistoryCollectionId
         jsonDecoder = JSONDecoder()
-        
+
         account = Account(client)
     }
 
@@ -32,7 +32,7 @@ class DecisionHistoryService {
     func createHistoryEntry(_ form: CreateDecisionHistoryForm) async throws -> DecisionHistoryModel {
         let appwriteUser = try await account.get()
         let userId = appwriteUser.id
-        
+
         let document = try await databases.createDocument(
             databaseId: databaseId,
             collectionId: decisionHistoryCollectionId,
@@ -56,7 +56,6 @@ class DecisionHistoryService {
             databaseId: databaseId,
             collectionId: decisionHistoryCollectionId,
             queries: [
-//                Query.equal("decision", value: decisionId),
                 Query.orderDesc("createdAt"),
             ]
         )
@@ -79,7 +78,6 @@ class DecisionHistoryService {
     }
 
     private func mapToHistoryList(_ documentList: DocumentList<[String: AnyCodable]>) async throws -> DecisionHistoryList {
-        
         let historyEntries = try await withThrowingTaskGroup(of: DecisionHistoryModel.self) { group in
             for document in documentList.documents {
                 group.addTask {

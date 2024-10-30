@@ -9,7 +9,7 @@ import SwiftUI
 struct CreateDecisionView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = CreateDecisionViewModel()
-    
+
     var body: some View {
         NavigationView {
             Form {
@@ -21,7 +21,7 @@ struct CreateDecisionView: View {
                 } footer: {
                     Text("Be clear and specific about what you're deciding")
                 }
-                
+
                 Section {
                     VStack {
                         HStack(spacing: 10) {
@@ -32,19 +32,19 @@ struct CreateDecisionView: View {
                             ) {
                                 updateDecision(.yes)
                             }
-                            
-                            DecisionButton(title: "No", isSelected: viewModel.form.answer == false , color: .red) {
+
+                            DecisionButton(title: "No", isSelected: viewModel.form.answer == false, color: .red) {
                                 updateDecision(.no)
                             }
                         }
                         .frame(maxWidth: .infinity)
-                        
+
                         DecisionButton(title: "Undecided", isSelected: viewModel.form.answer == nil, color: .orange) {
                             updateDecision(.undecided)
                         }
                     }
                     .padding(.vertical)
-                    
+
                 } header: {
                     Text("Initial Answer")
                 } footer: {
@@ -59,12 +59,11 @@ struct CreateDecisionView: View {
                         dismiss()
                     }
                 }
-                
+
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Create") {
                         Task {
                             await viewModel.createDecision()
-                            
                         }
                     }
                     .disabled(!viewModel.isValid)
@@ -77,58 +76,9 @@ struct CreateDecisionView: View {
             }
         }
     }
-    
+
     private func updateDecision(_ newStatus: DecisionStatus) {
         viewModel.form.answer = newStatus.recordValue
-    }
-}
-
-@MainActor
-class CreateDecisionViewModel: ObservableObject {
-    @Published var form = CreateDecisionForm(title: "", answer: false)
-    @Published var showError = false
-    @Published var errorMessage = ""
-    @Published private(set) var isCreating = false
-    
-    private let decisionService: DecisionService
-    
-    var isValid: Bool {
-        !form.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-    }
-    
-    init() {
-        // Initialize your services here similar to the list view
-        let authService = AuthService(
-            client: AppConfig.AppWrite.shared.client,
-            accountService: AccountService(
-                userDefaultsManager: UserDefaultsManager()
-            )
-        )
-        
-        decisionService = DecisionService(
-            authService: authService,
-            databaseId: AppConfig.AppWrite.shared.databaseID,
-            decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID
-        )
-    }
-    
-    func createDecision() async {
-        guard isValid else { return }
-        
-        isCreating = true
-        defer { isCreating = false }
-        
-        do {
-            // Assuming your DecisionService has a create method
-            try await decisionService
-                .createDecision(title: form.title, answer: form.answer)
-            
-            
-        } catch {
-            debugPrint(error.localizedDescription)
-            showError = true
-            errorMessage = "Failed to create decision: \(error.localizedDescription)"
-        }
     }
 }
 
@@ -137,32 +87,4 @@ struct CreateDecisionView_Previews: PreviewProvider {
     static var previews: some View {
         CreateDecisionView()
     }
-}
-
-// Helper Views
-struct LoadingButton: View {
-    let title: String
-    let isLoading: Bool
-    let action: () async -> Void
-    
-    var body: some View {
-        Button {
-            Task {
-                await action()
-            }
-        } label: {
-            if isLoading {
-                ProgressView()
-                    .tint(.white)
-            } else {
-                Text(title)
-            }
-        }
-        .disabled(isLoading)
-    }
-}
-
-struct CreateDecisionForm {
-    var title: String
-    var answer: Bool?
 }
