@@ -32,9 +32,7 @@ class HomeViewModel: ObservableObject {
         decService = DecisionService(
             authService: authService,
             databaseId: AppConfig.AppWrite.shared.databaseID,
-            decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID,
-            decisionHistoryCollectionId: "",
-            notesCollectionId: ""
+            decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID
         )
     }
 

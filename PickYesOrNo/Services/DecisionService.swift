@@ -12,27 +12,31 @@ class DecisionService {
     private let databases: Databases
     private let databaseId: String
     private let decisionsCollectionId: String
-    private let decisionHistoryCollectionId: String
-    private let notesCollectionId: String
     private let authService: AuthService
 
-    init(authService: AuthService, databaseId: String, decisionsCollectionId: String, decisionHistoryCollectionId: String, notesCollectionId: String) {
+    init(authService: AuthService, databaseId: String, decisionsCollectionId: String) {
         self.authService = authService
         databases = Databases(authService.getClient())
         self.databaseId = databaseId
         self.decisionsCollectionId = decisionsCollectionId
-        self.decisionHistoryCollectionId = decisionHistoryCollectionId
-        self.notesCollectionId = notesCollectionId
     }
 
     func createDecision(title: String, answer: Bool?) async throws {
         let currentUser = try await authService.getCurrentUser()
+        
+        
+        let decHistory: [String: Any] = [
+            "newAnswer": answer,
+            "createdAt": ISO8601DateFormatter().string(from: Date())
+        ]
+        
         let data: [String: Any] = [
             "userId": currentUser.id,
             "answer": answer,
             "createdAt": ISO8601DateFormatter().string(from: Date()),
             "lastUpdated": ISO8601DateFormatter().string(from: Date()),
-            "title": title
+            "title": title,
+            "decisionHistory": [decHistory]
         ]
 
         let document = try await databases.createDocument(
@@ -50,14 +54,13 @@ class DecisionService {
         debugPrint("Document \(document.data)")
     }
 
-    func updateDecision(id: String, newAnswer: Bool) async throws {
+    func updateDecision(id: String, newAnswer: Bool?) async throws {
         let decision = try await databases.getDocument(
             databaseId: databaseId,
             collectionId: decisionsCollectionId,
             documentId: id
         )
 
-        let oldAnswer = decision.data["answer"] as? Bool ?? false
         let updateData: [String: Any] = [
             "answer": newAnswer,
             "lastUpdated": ISO8601DateFormatter().string(from: Date()),
@@ -69,22 +72,6 @@ class DecisionService {
             documentId: id,
             data: updateData
         )
-
-        // Create decision history
-        let historyData: [String: Any] = [
-            "decisionId": id,
-            "previousAnswer": oldAnswer,
-            "newAnswer": newAnswer,
-            "changedAt": ISO8601DateFormatter().string(from: Date()),
-        ]
-
-        let document = try await databases.createDocument(
-            databaseId: databaseId,
-            collectionId: decisionHistoryCollectionId,
-            documentId: ID.unique(),
-            data: historyData
-        )
-        debugPrint("Document \(document)")
     }
 
     func getDecision(id: String) async throws {
@@ -114,18 +101,18 @@ class DecisionService {
     }
 
     func addNoteToDecision(decisionId: String, content: String) async throws {
-        let noteData: [String: Any] = [
-            "decisionId": decisionId,
-            "content": content,
-            "createdAt": ISO8601DateFormatter().string(from: Date()),
-        ]
-
-        let document = try await databases.createDocument(
-            databaseId: databaseId,
-            collectionId: notesCollectionId,
-            documentId: ID.unique(),
-            data: noteData
-        )
+//        let noteData: [String: Any] = [
+//            "decisionId": decisionId,
+//            "content": content,
+//            "createdAt": ISO8601DateFormatter().string(from: Date()),
+//        ]
+//
+//        let document = try await databases.createDocument(
+//            databaseId: databaseId,
+//            collectionId: notesCollectionId,
+//            documentId: ID.unique(),
+//            data: noteData
+//        )
     }
     
     ///  Deletes a Decision

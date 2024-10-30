@@ -64,7 +64,7 @@ struct CreateDecisionView: View {
                     Button("Create") {
                         Task {
                             await viewModel.createDecision()
-                            dismiss()
+                            
                         }
                     }
                     .disabled(!viewModel.isValid)
@@ -108,9 +108,7 @@ class CreateDecisionViewModel: ObservableObject {
         decisionService = DecisionService(
             authService: authService,
             databaseId: AppConfig.AppWrite.shared.databaseID,
-            decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID,
-            decisionHistoryCollectionId: "",
-            notesCollectionId: ""
+            decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID
         )
     }
     
@@ -124,7 +122,10 @@ class CreateDecisionViewModel: ObservableObject {
             // Assuming your DecisionService has a create method
             try await decisionService
                 .createDecision(title: form.title, answer: form.answer)
+            
+            
         } catch {
+            debugPrint(error.localizedDescription)
             showError = true
             errorMessage = "Failed to create decision: \(error.localizedDescription)"
         }

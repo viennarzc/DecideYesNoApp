@@ -30,11 +30,15 @@ struct AppConfig {
             let projectID: String
             let databaseID: String
             let decisionsCollectionID: String
+            let decisionsHistoryCollectionID: String
             
             init(endpoint: String, allowSelfSigned: Bool) {
                 self.projectID = AppConfig.getEnvironmentVariable("APPWRITE_PROJECT_ID")
                 self.databaseID = AppConfig.getEnvironmentVariable("APPWRITE_DATABASE_ID")
                 self.decisionsCollectionID = AppConfig.getEnvironmentVariable("APPWRITE_DECISIONS_COLLECTION_ID")
+                
+                self.decisionsHistoryCollectionID = AppConfig
+                    .getEnvironmentVariable("APPWRITE_DECISIONS_HISTORY_COLLECTION_ID")
 
                 client = Client()
                     .setEndpoint(endpoint)

@@ -29,6 +29,8 @@ extension DecisionStatus {
 struct MainDecisionView: View {
     @State private var decision: DecisionModel
     @State private var showingAddNoteSheet = false
+    
+    @StateObject private var viewModel: MainDecisionViewModel = MainDecisionViewModel()
 
     init(decision: DecisionModel) {
         _decision = State(initialValue: decision)
@@ -100,6 +102,10 @@ struct MainDecisionView: View {
 //        decision.answer = newStatus.recordValue
 //        decision.lastUpdated = Date()
         // Here you would also call a function to update the decision in the backend
+        Task {
+            await viewModel.updateDecision(with: decision.id, to: newStatus.recordValue)
+            
+        }
     }
 }
 
@@ -169,5 +175,36 @@ extension DecisionModel {
             title: "Example Title",
             createdAtString: Date.now.formatted()
         )
+    }
+}
+
+class MainDecisionViewModel: ObservableObject {
+    private var decisionCoordinator: DecisionCoordinator
+    private var authService: AuthService
+    
+    init() {
+        authService = AuthService(
+            client: AppConfig.AppWrite.shared.client,
+            accountService: AccountService(
+                userDefaultsManager: UserDefaultsManager()
+            )
+        )
+        
+        decisionCoordinator = DecisionCoordinator(
+            client: AppConfig.AppWrite.shared.client,
+            authService: authService,
+            databaseId: AppConfig.AppWrite.shared.databaseID,
+            decisionsCollectionId: AppConfig.AppWrite.shared.decisionsCollectionID,
+            decisionHistoryCollectionId: AppConfig.AppWrite.shared.decisionsHistoryCollectionID
+        )
+    }
+    
+    func updateDecision(with id: String, to answer: Bool?) async {
+        do {
+            try await decisionCoordinator.updateDecision(id: id, answer: answer)
+            
+        } catch {
+            debugPrint("error when updating: \(error.localizedDescription)")
+        }
     }
 }

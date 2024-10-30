@@ -23,6 +23,9 @@
 		8533E0DE2CD0E18100591B6B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */; };
 		8533E0E02CD0E19700591B6B /* DecisionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0DF2CD0E19700591B6B /* DecisionRow.swift */; };
 		8533E0E22CD0E1A700591B6B /* StatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E12CD0E1A700591B6B /* StatCard.swift */; };
+		8533E0E42CD1F14F00591B6B /* DecisionHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E32CD1F14F00591B6B /* DecisionHistoryModel.swift */; };
+		8533E0E62CD1F15A00591B6B /* DecisionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E52CD1F15A00591B6B /* DecisionHistoryService.swift */; };
+		8533E0E82CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E72CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift */; };
 		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
 		855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149EB2CCB102A00F50F21 /* DecisionService.swift */; };
 		855149F12CCB1BE700F50F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F02CCB1BE700F50F21 /* User.swift */; };
@@ -76,6 +79,9 @@
 		8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		8533E0DF2CD0E19700591B6B /* DecisionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionRow.swift; sourceTree = "<group>"; };
 		8533E0E12CD0E1A700591B6B /* StatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCard.swift; sourceTree = "<group>"; };
+		8533E0E32CD1F14F00591B6B /* DecisionHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryModel.swift; sourceTree = "<group>"; };
+		8533E0E52CD1F15A00591B6B /* DecisionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryService.swift; sourceTree = "<group>"; };
+		8533E0E72CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
 		855149EB2CCB102A00F50F21 /* DecisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionService.swift; sourceTree = "<group>"; };
@@ -212,6 +218,9 @@
 			isa = PBXGroup;
 			children = (
 				85CF274F2CC1E9F700D8E831 /* AccountService.swift */,
+				8533E0E72CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift */,
+				8533E0E32CD1F14F00591B6B /* DecisionHistoryModel.swift */,
+				8533E0E52CD1F15A00591B6B /* DecisionHistoryService.swift */,
 				855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */,
 				85AA8B9D2CC4615400E187CE /* AuthService.swift */,
 				85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */,
@@ -385,12 +394,15 @@
 				8533E0E22CD0E1A700591B6B /* StatCard.swift in Sources */,
 				855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */,
 				85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */,
+				8533E0E62CD1F15A00591B6B /* DecisionHistoryService.swift in Sources */,
 				8533E0DC2CD0E16400591B6B /* HomeView.swift in Sources */,
+				8533E0E42CD1F14F00591B6B /* DecisionHistoryModel.swift in Sources */,
 				855149F92CCB1C6C00F50F21 /* UserDefaultsManager.swift in Sources */,
 				855149F12CCB1BE700F50F21 /* User.swift in Sources */,
 				855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */,
 				855149FD2CCBC93600F50F21 /* LoginView.swift in Sources */,
 				855149F52CCB1C1F00F50F21 /* DecisionList.swift in Sources */,
+				8533E0E82CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
