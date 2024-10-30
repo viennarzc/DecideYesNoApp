@@ -26,6 +26,8 @@
 		8533E0E42CD1F14F00591B6B /* DecisionHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E32CD1F14F00591B6B /* DecisionHistoryModel.swift */; };
 		8533E0E62CD1F15A00591B6B /* DecisionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E52CD1F15A00591B6B /* DecisionHistoryService.swift */; };
 		8533E0E82CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E72CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift */; };
+		8533E0EA2CD2082500591B6B /* DecisionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E92CD2082500591B6B /* DecisionHistoryView.swift */; };
+		8533E0EC2CD20FF500591B6B /* DecisionHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0EB2CD20FF500591B6B /* DecisionHistoryItemView.swift */; };
 		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
 		855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149EB2CCB102A00F50F21 /* DecisionService.swift */; };
 		855149F12CCB1BE700F50F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F02CCB1BE700F50F21 /* User.swift */; };
@@ -82,6 +84,8 @@
 		8533E0E32CD1F14F00591B6B /* DecisionHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryModel.swift; sourceTree = "<group>"; };
 		8533E0E52CD1F15A00591B6B /* DecisionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryService.swift; sourceTree = "<group>"; };
 		8533E0E72CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		8533E0E92CD2082500591B6B /* DecisionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryView.swift; sourceTree = "<group>"; };
+		8533E0EB2CD20FF500591B6B /* DecisionHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryItemView.swift; sourceTree = "<group>"; };
 		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
 		855149EB2CCB102A00F50F21 /* DecisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionService.swift; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 			children = (
 				850453EC2CC09E9400885423 /* ContentView.swift */,
 				8533E0DB2CD0E16400591B6B /* HomeView.swift */,
+				8533E0E92CD2082500591B6B /* DecisionHistoryView.swift */,
+				8533E0EB2CD20FF500591B6B /* DecisionHistoryItemView.swift */,
 				8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */,
 				8533E0DF2CD0E19700591B6B /* DecisionRow.swift */,
 				8533E0E12CD0E1A700591B6B /* StatCard.swift */,
@@ -382,6 +388,7 @@
 				85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */,
 				85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */,
 				8533E0E02CD0E19700591B6B /* DecisionRow.swift in Sources */,
+				8533E0EC2CD20FF500591B6B /* DecisionHistoryItemView.swift in Sources */,
 				855149FB2CCB4DE100F50F21 /* CreateDecisionView.swift in Sources */,
 				8533E0D12CD050D200591B6B /* SettingsMainView.swift in Sources */,
 				8533E0DA2CD08DF100591B6B /* AuthView.swift in Sources */,
@@ -403,6 +410,7 @@
 				855149FD2CCBC93600F50F21 /* LoginView.swift in Sources */,
 				855149F52CCB1C1F00F50F21 /* DecisionList.swift in Sources */,
 				8533E0E82CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift in Sources */,
+				8533E0EA2CD2082500591B6B /* DecisionHistoryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

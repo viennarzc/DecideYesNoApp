@@ -29,7 +29,7 @@ extension DecisionStatus {
 struct MainDecisionView: View {
     @State private var decision: DecisionModel
     @State private var showingAddNoteSheet = false
-    
+
     @StateObject private var viewModel: MainDecisionViewModel = MainDecisionViewModel()
 
     init(decision: DecisionModel) {
@@ -84,7 +84,11 @@ struct MainDecisionView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    NavigationLink(destination: DecisionHistoryView()) {
+                    NavigationLink(
+                        destination: DecisionHistoryView(
+                            decisionID: self.decision.id
+                        )
+                    ) {
                         Image(systemName: "clock")
                     }
                     Button("Edit") {
@@ -104,7 +108,6 @@ struct MainDecisionView: View {
         // Here you would also call a function to update the decision in the backend
         Task {
             await viewModel.updateDecision(with: decision.id, to: newStatus.recordValue)
-            
         }
     }
 }
@@ -156,11 +159,7 @@ struct Note: Identifiable {
 }
 
 // These views are not implemented here but would be necessary
-struct DecisionHistoryView: View {
-    var body: some View {
-        Text("Decision History")
-    }
-}
+
 
 #Preview {
     NavigationStack {
@@ -181,7 +180,7 @@ extension DecisionModel {
 class MainDecisionViewModel: ObservableObject {
     private var decisionCoordinator: DecisionCoordinator
     private var authService: AuthService
-    
+
     init() {
         authService = AuthService(
             client: AppConfig.AppWrite.shared.client,
@@ -189,7 +188,7 @@ class MainDecisionViewModel: ObservableObject {
                 userDefaultsManager: UserDefaultsManager()
             )
         )
-        
+
         decisionCoordinator = DecisionCoordinator(
             client: AppConfig.AppWrite.shared.client,
             authService: authService,
@@ -198,11 +197,11 @@ class MainDecisionViewModel: ObservableObject {
             decisionHistoryCollectionId: AppConfig.AppWrite.shared.decisionsHistoryCollectionID
         )
     }
-    
+
     func updateDecision(with id: String, to answer: Bool?) async {
         do {
             try await decisionCoordinator.updateDecision(id: id, answer: answer)
-            
+
         } catch {
             debugPrint("error when updating: \(error.localizedDescription)")
         }

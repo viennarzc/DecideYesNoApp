@@ -22,6 +22,7 @@ class DecisionCoordinator: DecisionCoordinatorProtocol {
 
     private let decisionService: DecisionService
     private let historyService: DecisionHistoryService
+    private let account: Account
     
     init(client: Client, 
          authService: AuthService,
@@ -41,6 +42,8 @@ class DecisionCoordinator: DecisionCoordinatorProtocol {
             databaseId: databaseId,
             decisionHistoryCollectionId: decisionHistoryCollectionId
         )
+        
+        account = Account(client)
     }
     
     // MARK: - Coordinated Operations
