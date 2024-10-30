@@ -47,18 +47,34 @@ struct HomeView: View {
     private var statsOverview: some View {
         VStack(spacing: 16) {
             HStack {
-                StatCard(title: "Total Decisions", value: "\(viewModel.totalDecisions)")
-                StatCard(title: "Yes Decisions", value: "\(viewModel.yesDecisions)")
+                StatCard(
+                    title: "Total Decisions",
+                    value: "\(viewModel.totalDecisions)",
+                    systemName: "chart.bar.fill"
+                )
+                StatCard(
+                    title: "Yes Decisions",
+                    value: "\(viewModel.yesDecisions)",
+                    systemName: "checkmark.circle.fill"
+                )
             }
 
             HStack {
-                StatCard(title: "No Decisions", value: "\(viewModel.noDecisions)")
-                StatCard(title: "This Month", value: "\(viewModel.thisMonthDecisions)")
+                StatCard(
+                    title: "No Decisions",
+                    value: "\(viewModel.noDecisions)",
+                    systemName: "xmark.circle.fill"
+                )
+                StatCard(
+                    title: "This Month",
+                    value: "\(viewModel.thisMonthDecisions)",
+                    systemName: "calendar.badge.clock"
+                )
             }
 
             StatCard(
                 title: "Undecided",
-                value: "\(viewModel.undecidedDecisions)"
+                value: "\(viewModel.undecidedDecisions)", systemName: "questionmark.circle.fill"
             )
         }
     }

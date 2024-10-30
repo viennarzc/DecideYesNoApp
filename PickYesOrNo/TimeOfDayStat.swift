@@ -65,9 +65,11 @@ struct TimeOfDayStat: View {
             }
             .frame(alignment: .center)
             .padding()
-            .background(Color(.systemGray6))
-            .shadow(radius: 4)
-            .cornerRadius(10)
+            .background(content: {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.white)
+                    .shadow(color: .gray.opacity(0.3), radius: 8)
+            })
         }
     }
 }
