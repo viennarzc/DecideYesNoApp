@@ -15,6 +15,46 @@
 		850454062CC09E9600885423 /* PickYesOrNoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454052CC09E9600885423 /* PickYesOrNoUITests.swift */; };
 		850454082CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */; };
 		850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850454142CC1CAAB00885423 /* MainDecisionView.swift */; };
+		8533E0D12CD050D200591B6B /* SettingsMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D02CD050D200591B6B /* SettingsMainView.swift */; };
+		8533E0D42CD0591D00591B6B /* FirstAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D32CD0591D00591B6B /* FirstAppear.swift */; };
+		8533E0D82CD08BED00591B6B /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D72CD08BED00591B6B /* SignupView.swift */; };
+		8533E0DA2CD08DF100591B6B /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0D92CD08DF100591B6B /* AuthView.swift */; };
+		8533E0DC2CD0E16400591B6B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0DB2CD0E16400591B6B /* HomeView.swift */; };
+		8533E0DE2CD0E18100591B6B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */; };
+		8533E0E02CD0E19700591B6B /* DecisionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0DF2CD0E19700591B6B /* DecisionRow.swift */; };
+		8533E0E22CD0E1A700591B6B /* StatCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E12CD0E1A700591B6B /* StatCard.swift */; };
+		8533E0E42CD1F14F00591B6B /* DecisionHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E32CD1F14F00591B6B /* DecisionHistoryModel.swift */; };
+		8533E0E62CD1F15A00591B6B /* DecisionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E52CD1F15A00591B6B /* DecisionHistoryService.swift */; };
+		8533E0E82CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E72CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift */; };
+		8533E0EA2CD2082500591B6B /* DecisionHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0E92CD2082500591B6B /* DecisionHistoryView.swift */; };
+		8533E0EC2CD20FF500591B6B /* DecisionHistoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0EB2CD20FF500591B6B /* DecisionHistoryItemView.swift */; };
+		8533E0EF2CD265AA00591B6B /* DecisionHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0EE2CD265AA00591B6B /* DecisionHistoryViewModel.swift */; };
+		8533E0F22CD265EE00591B6B /* CreateDecisionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0F12CD265EE00591B6B /* CreateDecisionViewModel.swift */; };
+		8533E0F52CD2660C00591B6B /* DecisionListMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0F42CD2660C00591B6B /* DecisionListMainViewModel.swift */; };
+		8533E0F82CD2664500591B6B /* MainDecisionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0F72CD2664500591B6B /* MainDecisionViewModel.swift */; };
+		8533E0FB2CD2665F00591B6B /* SettingsMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0FA2CD2665F00591B6B /* SettingsMainViewModel.swift */; };
+		8533E0FE2CD2667700591B6B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E0FD2CD2667700591B6B /* LoginViewModel.swift */; };
+		8533E1032CD266D800591B6B /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1022CD266D800591B6B /* SignupViewModel.swift */; };
+		8533E1062CD2676400591B6B /* LoadingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1052CD2676400591B6B /* LoadingButton.swift */; };
+		8533E1082CD2677A00591B6B /* CreateDecisionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1072CD2677A00591B6B /* CreateDecisionForm.swift */; };
+		8533E10A2CD2694000591B6B /* CreateDecisionHistoryForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1092CD2694000591B6B /* CreateDecisionHistoryForm.swift */; };
+		8533E10C2CD2694600591B6B /* DecisionHistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E10B2CD2694600591B6B /* DecisionHistoryList.swift */; };
+		8533E10E2CD2EB1500591B6B /* TimeAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E10D2CD2EB1500591B6B /* TimeAnalysis.swift */; };
+		8533E1122CD2F0D400591B6B /* TimeOfDayStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1112CD2F0D400591B6B /* TimeOfDayStat.swift */; };
+		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
+		855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149EB2CCB102A00F50F21 /* DecisionService.swift */; };
+		855149F12CCB1BE700F50F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F02CCB1BE700F50F21 /* User.swift */; };
+		855149F32CCB1C1000F50F21 /* DecisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F22CCB1C1000F50F21 /* DecisionModel.swift */; };
+		855149F52CCB1C1F00F50F21 /* DecisionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F42CCB1C1F00F50F21 /* DecisionList.swift */; };
+		855149F72CCB1C2700F50F21 /* DecisionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F62CCB1C2700F50F21 /* DecisionHistory.swift */; };
+		855149F92CCB1C6C00F50F21 /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */; };
+		855149FB2CCB4DE100F50F21 /* CreateDecisionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149FA2CCB4DE100F50F21 /* CreateDecisionView.swift */; };
+		855149FD2CCBC93600F50F21 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149FC2CCBC93600F50F21 /* LoginView.swift */; };
+		85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9D2CC4615400E187CE /* AuthService.swift */; };
+		85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8B9F2CC461AE00E187CE /* AppConfig.swift */; };
+		85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */; };
+		85CF274E2CC1E86300D8E831 /* Appwrite in Frameworks */ = {isa = PBXBuildFile; productRef = 85CF274D2CC1E86300D8E831 /* Appwrite */; };
+		85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CF274F2CC1E9F700D8E831 /* AccountService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +86,47 @@
 		850454052CC09E9600885423 /* PickYesOrNoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickYesOrNoUITests.swift; sourceTree = "<group>"; };
 		850454072CC09E9600885423 /* PickYesOrNoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickYesOrNoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		850454142CC1CAAB00885423 /* MainDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDecisionView.swift; sourceTree = "<group>"; };
+		8533E0D02CD050D200591B6B /* SettingsMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainView.swift; sourceTree = "<group>"; };
+		8533E0D32CD0591D00591B6B /* FirstAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstAppear.swift; sourceTree = "<group>"; };
+		8533E0D72CD08BED00591B6B /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
+		8533E0D92CD08DF100591B6B /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		8533E0DB2CD0E16400591B6B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		8533E0DF2CD0E19700591B6B /* DecisionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionRow.swift; sourceTree = "<group>"; };
+		8533E0E12CD0E1A700591B6B /* StatCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCard.swift; sourceTree = "<group>"; };
+		8533E0E32CD1F14F00591B6B /* DecisionHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryModel.swift; sourceTree = "<group>"; };
+		8533E0E52CD1F15A00591B6B /* DecisionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryService.swift; sourceTree = "<group>"; };
+		8533E0E72CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		8533E0E92CD2082500591B6B /* DecisionHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryView.swift; sourceTree = "<group>"; };
+		8533E0EB2CD20FF500591B6B /* DecisionHistoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryItemView.swift; sourceTree = "<group>"; };
+		8533E0EE2CD265AA00591B6B /* DecisionHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryViewModel.swift; sourceTree = "<group>"; };
+		8533E0F12CD265EE00591B6B /* CreateDecisionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDecisionViewModel.swift; sourceTree = "<group>"; };
+		8533E0F42CD2660C00591B6B /* DecisionListMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainViewModel.swift; sourceTree = "<group>"; };
+		8533E0F72CD2664500591B6B /* MainDecisionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDecisionViewModel.swift; sourceTree = "<group>"; };
+		8533E0FA2CD2665F00591B6B /* SettingsMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMainViewModel.swift; sourceTree = "<group>"; };
+		8533E0FD2CD2667700591B6B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		8533E1022CD266D800591B6B /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		8533E1052CD2676400591B6B /* LoadingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButton.swift; sourceTree = "<group>"; };
+		8533E1072CD2677A00591B6B /* CreateDecisionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDecisionForm.swift; sourceTree = "<group>"; };
+		8533E1092CD2694000591B6B /* CreateDecisionHistoryForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDecisionHistoryForm.swift; sourceTree = "<group>"; };
+		8533E10B2CD2694600591B6B /* DecisionHistoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryList.swift; sourceTree = "<group>"; };
+		8533E10D2CD2EB1500591B6B /* TimeAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAnalysis.swift; sourceTree = "<group>"; };
+		8533E1112CD2F0D400591B6B /* TimeOfDayStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDayStat.swift; sourceTree = "<group>"; };
+		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
+		855149EB2CCB102A00F50F21 /* DecisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionService.swift; sourceTree = "<group>"; };
+		855149F02CCB1BE700F50F21 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		855149F22CCB1C1000F50F21 /* DecisionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionModel.swift; sourceTree = "<group>"; };
+		855149F42CCB1C1F00F50F21 /* DecisionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionList.swift; sourceTree = "<group>"; };
+		855149F62CCB1C2700F50F21 /* DecisionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistory.swift; sourceTree = "<group>"; };
+		855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		855149FA2CCB4DE100F50F21 /* CreateDecisionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDecisionView.swift; sourceTree = "<group>"; };
+		855149FC2CCBC93600F50F21 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		85AA8B9D2CC4615400E187CE /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		85AA8B9F2CC461AE00E187CE /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionServiceProtocol.swift; sourceTree = "<group>"; };
+		85AA8BA52CC4E25700E187CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		85CF274F2CC1E9F700D8E831 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85CF274E2CC1E86300D8E831 /* Appwrite in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +158,7 @@
 		850453DE2CC09E9300885423 = {
 			isa = PBXGroup;
 			children = (
+				855149E62CC703D700F50F21 /* Config.xcconfig */,
 				850453E92CC09E9400885423 /* PickYesOrNo */,
 				850453FA2CC09E9600885423 /* PickYesOrNoTests */,
 				850454042CC09E9600885423 /* PickYesOrNoUITests */,
@@ -96,9 +179,15 @@
 		850453E92CC09E9400885423 /* PickYesOrNo */ = {
 			isa = PBXGroup;
 			children = (
+				8533E0D22CD0590A00591B6B /* ViewModifiers */,
+				85AA8BA52CC4E25700E187CE /* Info.plist */,
 				850453EA2CC09E9400885423 /* PickYesOrNoApp.swift */,
-				850453EC2CC09E9400885423 /* ContentView.swift */,
-				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
+				8533E1112CD2F0D400591B6B /* TimeOfDayStat.swift */,
+				8533E10D2CD2EB1500591B6B /* TimeAnalysis.swift */,
+				855149ED2CCB1B9200F50F21 /* Views */,
+				855149EE2CCB1BB100F50F21 /* Services */,
+				85AA8B9F2CC461AE00E187CE /* AppConfig.swift */,
+				855149EF2CCB1BD800F50F21 /* Models */,
 				850453EE2CC09E9500885423 /* Assets.xcassets */,
 				850453F02CC09E9500885423 /* Preview Content */,
 			);
@@ -130,6 +219,144 @@
 			path = PickYesOrNoUITests;
 			sourceTree = "<group>";
 		};
+		8533E0D22CD0590A00591B6B /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				8533E0D32CD0591D00591B6B /* FirstAppear.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		8533E0ED2CD2659600591B6B /* HomeView */ = {
+			isa = PBXGroup;
+			children = (
+				8533E0DB2CD0E16400591B6B /* HomeView.swift */,
+				8533E0DD2CD0E18100591B6B /* HomeViewModel.swift */,
+			);
+			path = HomeView;
+			sourceTree = "<group>";
+		};
+		8533E0F02CD265BA00591B6B /* DecisionHistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				8533E0E92CD2082500591B6B /* DecisionHistoryView.swift */,
+				8533E0EE2CD265AA00591B6B /* DecisionHistoryViewModel.swift */,
+			);
+			path = DecisionHistoryView;
+			sourceTree = "<group>";
+		};
+		8533E0F32CD265F300591B6B /* CreateDecisionViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				855149FA2CCB4DE100F50F21 /* CreateDecisionView.swift */,
+				8533E0F12CD265EE00591B6B /* CreateDecisionViewModel.swift */,
+			);
+			path = CreateDecisionViewModel;
+			sourceTree = "<group>";
+		};
+		8533E0F62CD2661600591B6B /* DecisionListMainView */ = {
+			isa = PBXGroup;
+			children = (
+				855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */,
+				8533E0F42CD2660C00591B6B /* DecisionListMainViewModel.swift */,
+			);
+			path = DecisionListMainView;
+			sourceTree = "<group>";
+		};
+		8533E0F92CD2665200591B6B /* MainDecisionView */ = {
+			isa = PBXGroup;
+			children = (
+				850454142CC1CAAB00885423 /* MainDecisionView.swift */,
+				8533E0F72CD2664500591B6B /* MainDecisionViewModel.swift */,
+			);
+			path = MainDecisionView;
+			sourceTree = "<group>";
+		};
+		8533E0FC2CD2666900591B6B /* SettingsMainView */ = {
+			isa = PBXGroup;
+			children = (
+				8533E0D02CD050D200591B6B /* SettingsMainView.swift */,
+				8533E0FA2CD2665F00591B6B /* SettingsMainViewModel.swift */,
+			);
+			path = SettingsMainView;
+			sourceTree = "<group>";
+		};
+		8533E0FF2CD2668600591B6B /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				855149FC2CCBC93600F50F21 /* LoginView.swift */,
+				8533E0FD2CD2667700591B6B /* LoginViewModel.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		8533E1012CD266A900591B6B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8533E0EB2CD20FF500591B6B /* DecisionHistoryItemView.swift */,
+				8533E1052CD2676400591B6B /* LoadingButton.swift */,
+				8533E0DF2CD0E19700591B6B /* DecisionRow.swift */,
+				8533E0E12CD0E1A700591B6B /* StatCard.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		8533E1042CD266DB00591B6B /* SignupView */ = {
+			isa = PBXGroup;
+			children = (
+				8533E0D72CD08BED00591B6B /* SignupView.swift */,
+				8533E1022CD266D800591B6B /* SignupViewModel.swift */,
+			);
+			path = SignupView;
+			sourceTree = "<group>";
+		};
+		855149ED2CCB1B9200F50F21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8533E0D92CD08DF100591B6B /* AuthView.swift */,
+				850453EC2CC09E9400885423 /* ContentView.swift */,
+				8533E1012CD266A900591B6B /* Common */,
+				8533E0F32CD265F300591B6B /* CreateDecisionViewModel */,
+				8533E0F02CD265BA00591B6B /* DecisionHistoryView */,
+				8533E0F62CD2661600591B6B /* DecisionListMainView */,
+				8533E0ED2CD2659600591B6B /* HomeView */,
+				8533E0FF2CD2668600591B6B /* LoginView */,
+				8533E0F92CD2665200591B6B /* MainDecisionView */,
+				8533E0FC2CD2666900591B6B /* SettingsMainView */,
+				8533E1042CD266DB00591B6B /* SignupView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		855149EE2CCB1BB100F50F21 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				85CF274F2CC1E9F700D8E831 /* AccountService.swift */,
+				8533E0E72CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift */,
+				8533E0E32CD1F14F00591B6B /* DecisionHistoryModel.swift */,
+				8533E0E52CD1F15A00591B6B /* DecisionHistoryService.swift */,
+				855149F82CCB1C6C00F50F21 /* UserDefaultsManager.swift */,
+				85AA8B9D2CC4615400E187CE /* AuthService.swift */,
+				85AA8BA32CC46B4600E187CE /* DecisionServiceProtocol.swift */,
+				855149EB2CCB102A00F50F21 /* DecisionService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		855149EF2CCB1BD800F50F21 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				855149F02CCB1BE700F50F21 /* User.swift */,
+				8533E1092CD2694000591B6B /* CreateDecisionHistoryForm.swift */,
+				8533E10B2CD2694600591B6B /* DecisionHistoryList.swift */,
+				855149F22CCB1C1000F50F21 /* DecisionModel.swift */,
+				8533E1072CD2677A00591B6B /* CreateDecisionForm.swift */,
+				855149F62CCB1C2700F50F21 /* DecisionHistory.swift */,
+				855149F42CCB1C1F00F50F21 /* DecisionList.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -146,6 +373,9 @@
 			dependencies = (
 			);
 			name = PickYesOrNo;
+			packageProductDependencies = (
+				85CF274D2CC1E86300D8E831 /* Appwrite */,
+			);
 			productName = PickYesOrNo;
 			productReference = 850453E72CC09E9400885423 /* PickYesOrNo.app */;
 			productType = "com.apple.product-type.application";
@@ -218,6 +448,9 @@
 				Base,
 			);
 			mainGroup = 850453DE2CC09E9300885423;
+			packageReferences = (
+				85CF274C2CC1E86300D8E831 /* XCRemoteSwiftPackageReference "sdk-for-apple" */,
+			);
 			productRefGroup = 850453E82CC09E9400885423 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -260,9 +493,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8533E0D82CD08BED00591B6B /* SignupView.swift in Sources */,
+				8533E0DE2CD0E18100591B6B /* HomeViewModel.swift in Sources */,
 				850453ED2CC09E9400885423 /* ContentView.swift in Sources */,
+				85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */,
+				85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */,
+				8533E0E02CD0E19700591B6B /* DecisionRow.swift in Sources */,
+				8533E0F22CD265EE00591B6B /* CreateDecisionViewModel.swift in Sources */,
+				8533E0EC2CD20FF500591B6B /* DecisionHistoryItemView.swift in Sources */,
+				855149FB2CCB4DE100F50F21 /* CreateDecisionView.swift in Sources */,
+				8533E0D12CD050D200591B6B /* SettingsMainView.swift in Sources */,
+				8533E1062CD2676400591B6B /* LoadingButton.swift in Sources */,
+				8533E0DA2CD08DF100591B6B /* AuthView.swift in Sources */,
+				855149F72CCB1C2700F50F21 /* DecisionHistory.swift in Sources */,
+				85AA8BA02CC461AE00E187CE /* AppConfig.swift in Sources */,
+				8533E0FE2CD2667700591B6B /* LoginViewModel.swift in Sources */,
+				8533E0D42CD0591D00591B6B /* FirstAppear.swift in Sources */,
 				850454152CC1CAAB00885423 /* MainDecisionView.swift in Sources */,
+				855149F32CCB1C1000F50F21 /* DecisionModel.swift in Sources */,
 				850453EB2CC09E9400885423 /* PickYesOrNoApp.swift in Sources */,
+				8533E1032CD266D800591B6B /* SignupViewModel.swift in Sources */,
+				8533E0E22CD0E1A700591B6B /* StatCard.swift in Sources */,
+				855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */,
+				85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */,
+				8533E10A2CD2694000591B6B /* CreateDecisionHistoryForm.swift in Sources */,
+				8533E0FB2CD2665F00591B6B /* SettingsMainViewModel.swift in Sources */,
+				8533E10E2CD2EB1500591B6B /* TimeAnalysis.swift in Sources */,
+				8533E0F82CD2664500591B6B /* MainDecisionViewModel.swift in Sources */,
+				8533E0E62CD1F15A00591B6B /* DecisionHistoryService.swift in Sources */,
+				8533E0F52CD2660C00591B6B /* DecisionListMainViewModel.swift in Sources */,
+				8533E0DC2CD0E16400591B6B /* HomeView.swift in Sources */,
+				8533E0E42CD1F14F00591B6B /* DecisionHistoryModel.swift in Sources */,
+				855149F92CCB1C6C00F50F21 /* UserDefaultsManager.swift in Sources */,
+				855149F12CCB1BE700F50F21 /* User.swift in Sources */,
+				8533E10C2CD2694600591B6B /* DecisionHistoryList.swift in Sources */,
+				855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */,
+				855149FD2CCBC93600F50F21 /* LoginView.swift in Sources */,
+				855149F52CCB1C1F00F50F21 /* DecisionList.swift in Sources */,
+				8533E1122CD2F0D400591B6B /* TimeOfDayStat.swift in Sources */,
+				8533E0E82CD1FCA300591B6B /* DecisionCoordinatorProtocol.swift in Sources */,
+				8533E0EA2CD2082500591B6B /* DecisionHistoryView.swift in Sources */,
+				8533E0EF2CD265AA00591B6B /* DecisionHistoryViewModel.swift in Sources */,
+				8533E1082CD2677A00591B6B /* CreateDecisionForm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +573,7 @@
 /* Begin XCBuildConfiguration section */
 		850454092CC09E9600885423 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855149E62CC703D700F50F21 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -364,6 +637,7 @@
 		};
 		8504540A2CC09E9600885423 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855149E62CC703D700F50F21 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -420,6 +694,7 @@
 		};
 		8504540C2CC09E9600885423 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855149E62CC703D700F50F21 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -429,6 +704,7 @@
 				DEVELOPMENT_TEAM = 6UWE2EP59T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PickYesOrNo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -449,6 +725,7 @@
 		};
 		8504540D2CC09E9600885423 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 855149E62CC703D700F50F21 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -458,6 +735,7 @@
 				DEVELOPMENT_TEAM = 6UWE2EP59T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PickYesOrNo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -592,6 +870,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		85CF274C2CC1E86300D8E831 /* XCRemoteSwiftPackageReference "sdk-for-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/appwrite/sdk-for-apple";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		85CF274D2CC1E86300D8E831 /* Appwrite */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 85CF274C2CC1E86300D8E831 /* XCRemoteSwiftPackageReference "sdk-for-apple" */;
+			productName = Appwrite;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 850453DF2CC09E9300885423 /* Project object */;
 }
