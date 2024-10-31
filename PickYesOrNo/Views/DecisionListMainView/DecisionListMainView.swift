@@ -116,6 +116,8 @@ struct DecisionListMainView: View {
                 Task {
                     await viewModel.getDecisions()
                 }
+            }, onTapSignup: {
+                
             })
         })
         .task {

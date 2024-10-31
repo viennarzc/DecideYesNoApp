@@ -54,6 +54,8 @@ struct SettingsMainView: View {
                         await viewModel.getCurrentUser()
                         hasActiveSession = await viewModel.getSession() ?? false
                     }
+                }, onTapSignup: {
+                    
                 })
             })
         }

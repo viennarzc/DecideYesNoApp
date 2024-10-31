@@ -10,18 +10,18 @@ struct AuthView: View {
     @State private var selectedTab: Tab = .login
     var onSuccessLogin: () -> Void
     var onSignupSuccess: () -> Void
-    
+
     enum Tab: Identifiable, CaseIterable {
         case login
         case signup
-        
+
         var id: Self { self }
-        
+
         var title: String {
             switch self {
             case .login:
                 return "Login"
-                
+
             case .signup:
                 return "Sign Up"
             }
@@ -30,35 +30,32 @@ struct AuthView: View {
 
     var body: some View {
         NavigationStack {
-            VStack {
-                Spacer()
-                
-                Picker(selection: $selectedTab) {
-                    ForEach(Tab.allCases) { tab in
-                        Text(tab.title)
-                    }
+            ScrollView {
+                VStack {
                     
-                } label: {
-                    Text("Tab Picker")
-                }
-                .pickerStyle(.segmented)
-                .padding(.horizontal)
-                
-                switch selectedTab {
-                case .login:
-                    LoginView(onSuccessLogin: onSuccessLogin)
+                    switch selectedTab {
+                    case .login:
+                        LoginView(onSuccessLogin: onSuccessLogin, onTapSignup: {
+                            
+                            withAnimation(.spring) {
+                                selectedTab = .signup
+                            }
+                        })
+                        .padding()
                         .tabItem {
                             Text("Login")
                         }
-                    
-                case .signup:
-                    SignupView(onSignupSuccess: onSignupSuccess)
-                        .tabItem {
-                            Text("Sign Up")
-                        }
-                    
+                        
+                    case .signup:
+                        SignupView(onSignupSuccess: onSignupSuccess)
+                            .padding()
+                            .tabItem {
+                                Text("Sign Up")
+                            }
+                            
+                    }
                 }
-                
+                .navigationTitle(selectedTab.title)
             }
         }
     }

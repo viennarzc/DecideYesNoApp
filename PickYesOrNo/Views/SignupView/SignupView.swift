@@ -28,6 +28,9 @@ struct SignupView: View {
                     text: $email.animation(.spring)
                 )
             }
+            
+            Divider()
+                .padding(.vertical)
 
             VStack {
                 Text("Password")
@@ -62,8 +65,7 @@ struct SignupView: View {
             .buttonStyle(BorderedProminentButtonStyle())
             .disabled(disableLoginButton)
         }
-        .safeAreaPadding(.top, 64)
-        .navigationTitle("Login")
+        .formStyle(.columns)
     }
 
     private var disableLoginButton: Bool {
