@@ -18,7 +18,7 @@ struct DecisionHistoryView: View {
     var body: some View {
         VStack {
             if let historyList = viewModel.historyList {
-                if historyList.documents.isEmpty {
+                if historyList.sortedByDate.isEmpty {
                     emptyStateView
                 } else {
                     ScrollView {

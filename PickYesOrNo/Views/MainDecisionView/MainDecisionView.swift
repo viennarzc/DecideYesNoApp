@@ -28,13 +28,22 @@ extension DecisionStatus {
 
 struct MainDecisionView: View {
     @State private var decision: DecisionModel
-    @State private var showingAddNoteSheet = false
+    @State private var showDeleteDecisionConfirmation: Bool = false
+    @Environment(\.dismiss) private var dismiss
 
     @StateObject private var viewModel: MainDecisionViewModel = MainDecisionViewModel()
-
-    init(decision: DecisionModel) {
-        _decision = State(initialValue: decision)
+    
+    enum Event {
+        case onUpdateDecision
+        case onDeleteDecision
     }
+
+    init(decision: DecisionModel, onEvent: @escaping (Event) -> Void) {
+        _decision = State(initialValue: decision)
+        self.onEvent = onEvent
+    }
+    
+    var onEvent: (Event) -> Void
 
     var body: some View {
         ScrollView {
@@ -80,22 +89,56 @@ struct MainDecisionView: View {
                     ) {
                         Image(systemName: "clock")
                     }
-                    
+
                     Button(role: .destructive) {
+                        showDeleteDecisionConfirmation.toggle()
                         
+                      
                     } label: {
                         Label("Delete", systemImage: "trash")
                     }
-                    
-
                 }
             }
+            .confirmationDialog("Delete Decision?", isPresented: $showDeleteDecisionConfirmation) {
+                Button(role: .destructive) {
+                    Task {
+                        let result = await viewModel.deleteDecision(id: decision.id)
+                        
+                        if result {
+                            await MainActor.run {
+                                onEvent(.onDeleteDecision)
+                                dismiss()
+                            }
+                        }
+                    }
+                    
+                } label: {
+                    Text("Delete")
+                }
+                
+                Button("No", role: .cancel) {
+                    
+                }
+
+            } message: {
+                Text("This will be delete forever and cannot be undone.")
+            }
+
         }
     }
 
     private func updateDecision(_ newStatus: DecisionStatus) {
+        
         Task {
             await viewModel.updateDecision(with: decision.id, to: newStatus.recordValue)
+            
+            guard let decision = await viewModel.getDecision(for: decision.id) else { return }
+            
+            self.decision = decision
+
+            await MainActor.run {
+                onEvent(.onUpdateDecision)                
+            }
         }
     }
 }
@@ -148,10 +191,9 @@ struct Note: Identifiable {
 
 // These views are not implemented here but would be necessary
 
-
 #Preview {
     NavigationStack {
-        MainDecisionView(decision: DecisionModel.example)
+        MainDecisionView(decision: DecisionModel.example, onEvent: { _ in })
     }
 }
 
@@ -165,5 +207,3 @@ extension DecisionModel {
         )
     }
 }
-
-

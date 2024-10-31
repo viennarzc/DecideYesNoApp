@@ -69,6 +69,14 @@ class DecisionCoordinator: DecisionCoordinatorProtocol {
     func getDecisionHistory(decisionId: String) async throws -> DecisionHistoryList {
         return try await historyService.getHistoryForDecision(decisionId: decisionId)
     }
+    
+    func deleteDecision(id: String) async -> Bool {
+        return await decisionService.deleteDecision(id: id)
+    }
+    
+    func getDecision(for id: String) async throws -> DecisionModel? {
+        return try await decisionService.getDecision(id: id)
+    }
 }
 
 // MARK: - Convenience Methods

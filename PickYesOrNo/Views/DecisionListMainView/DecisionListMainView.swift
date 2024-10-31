@@ -32,7 +32,14 @@ struct DecisionListMainView: View {
                             ForEach(decisions.documents) { decision in
                                 NavigationLink(
                                     destination: {
-                                        MainDecisionView(decision: decision)
+                                        MainDecisionView(
+                                            decision: decision,
+                                            onEvent: { event in
+                                                Task {
+                                                    await viewModel.getDecisions()
+                                                }
+                                            }
+                                        )
                                     }
                                 ) {
                                     DecisionCard(decision: decision)
