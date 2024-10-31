@@ -57,6 +57,7 @@ class DecisionHistoryService {
             collectionId: decisionHistoryCollectionId,
             queries: [
                 Query.orderDesc("createdAt"),
+                Query.orderDesc("$createdAt"),
                 Query.equal("decision", value: decisionId)
             ]
         )

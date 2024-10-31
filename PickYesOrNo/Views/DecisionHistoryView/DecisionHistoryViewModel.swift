@@ -33,3 +33,15 @@ class DecisionHistoryViewModel: ObservableObject {
         }
     }
 }
+
+extension DecisionHistoryList {
+    var sortedByDate: [DecisionHistoryModel] {
+        documents.sorted { first, second in
+            guard let firstDate = first.createdAt,
+                  let secondDate = second.createdAt else {
+                return false // Items with invalid dates will be placed at the end
+            }
+            return firstDate > secondDate // Sort in descending order (newest first)
+        }
+    }
+}

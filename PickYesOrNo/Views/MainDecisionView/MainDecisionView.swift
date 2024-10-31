@@ -128,10 +128,17 @@ struct MainDecisionView: View {
     }
 
     private func updateDecision(_ newStatus: DecisionStatus) {
-        onEvent(.onUpdateDecision)
         
         Task {
             await viewModel.updateDecision(with: decision.id, to: newStatus.recordValue)
+            
+            guard let decision = await viewModel.getDecision(for: decision.id) else { return }
+            
+            self.decision = decision
+
+            await MainActor.run {
+                onEvent(.onUpdateDecision)                
+            }
         }
     }
 }

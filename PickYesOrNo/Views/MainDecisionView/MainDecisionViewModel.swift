@@ -41,4 +41,15 @@ class MainDecisionViewModel: ObservableObject {
         
         return result
     }
+    
+    func getDecision(for id: String) async -> DecisionModel? {
+        do {
+            let decision = try await decisionCoordinator.getDecision(for: id)
+            return decision
+            
+        } catch {
+            debugPrint("error when getting decision: \(error.localizedDescription)")
+            return nil
+        }
+    }
 }
