@@ -35,4 +35,10 @@ class MainDecisionViewModel: ObservableObject {
             debugPrint("error when updating: \(error.localizedDescription)")
         }
     }
+    
+    func deleteDecision(id: String) async -> Bool {
+        let result = await decisionCoordinator.deleteDecision(id: id)
+        
+        return result
+    }
 }
