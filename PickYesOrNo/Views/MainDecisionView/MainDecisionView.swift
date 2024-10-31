@@ -80,6 +80,14 @@ struct MainDecisionView: View {
                     ) {
                         Image(systemName: "clock")
                     }
+                    
+                    Button(role: .destructive) {
+                        
+                    } label: {
+                        Label("Delete", systemImage: "trash")
+                    }
+                    
+
                 }
             }
         }

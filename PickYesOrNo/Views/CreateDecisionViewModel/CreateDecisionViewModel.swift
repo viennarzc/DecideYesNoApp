@@ -5,13 +5,17 @@
 //  Created by Viennarz Curtiz on 10/30/24.
 //
 import Foundation
+import Combine
 
 @MainActor
 class CreateDecisionViewModel: ObservableObject {
+    
     @Published var form = CreateDecisionForm(title: "", answer: false)
     @Published var showError = false
     @Published var errorMessage = ""
     @Published private(set) var isCreating = false
+    
+    let onSuccessCreateDecision = PassthroughSubject<Void, Error>()
     
     private let decisionService: DecisionService
     
@@ -45,11 +49,12 @@ class CreateDecisionViewModel: ObservableObject {
             // Assuming your DecisionService has a create method
             try await decisionService
                 .createDecision(title: form.title, answer: form.answer)
-            
+            onSuccessCreateDecision.send(())
             
         } catch {
             debugPrint(error.localizedDescription)
             showError = true
+            onSuccessCreateDecision.send(completion: .failure(error))
             errorMessage = "Failed to create decision: \(error.localizedDescription)"
         }
     }

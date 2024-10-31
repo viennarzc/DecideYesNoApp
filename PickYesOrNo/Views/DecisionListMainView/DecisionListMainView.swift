@@ -95,6 +95,13 @@ struct DecisionListMainView: View {
         .sheet(isPresented: $isPresentingCreateDecisions, content: {
             CreateDecisionView()
         })
+        .onChange(of: isPresentingCreateDecisions, { oldValue, newValue in
+            if oldValue, !newValue {
+                Task {
+                    await viewModel.getDecisions()
+                }
+            }
+        })
         .sheet(isPresented: $isPresentingLoginView, content: {
             LoginView(onSuccessLogin: {
                 isPresentingLoginView = false

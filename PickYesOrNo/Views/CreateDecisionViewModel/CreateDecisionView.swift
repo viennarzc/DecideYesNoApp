@@ -5,10 +5,13 @@
 //  Created by Viennarz Curtiz on 10/25/24.
 //
 import SwiftUI
+import Combine
 
 struct CreateDecisionView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = CreateDecisionViewModel()
+    
+    @State private var cancellable: AnyCancellable?
 
     var body: some View {
         NavigationView {
@@ -50,6 +53,21 @@ struct CreateDecisionView: View {
                 } footer: {
                     Text("You can always change this later")
                 }
+            }
+            .onAppear {
+                cancellable = viewModel.onSuccessCreateDecision
+                    .sink { completion in
+                        switch completion {
+                        case .finished:
+                            debugPrint("Finished")
+                        case .failure(let error):
+                            debugPrint("Received error: \(error)")
+                        }
+                    } receiveValue: { _ in
+                        //assumes success
+                        dismiss()
+                    }
+
             }
             .navigationTitle("New Decision")
             .navigationBarTitleDisplayMode(.inline)
