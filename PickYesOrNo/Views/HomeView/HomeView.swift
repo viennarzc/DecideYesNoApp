@@ -19,16 +19,7 @@ struct HomeView: View {
                     // Recent Decisions
                     recentDecisions
 
-                    Section {
-                        GroupBox {
-                            DecisionTimeAnalytics(decisions: viewModel.recentDecisions)
-                        }
-
-                    } header: {
-                        Text("Decision Time Patterns")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
+                    analyticsSection
                 }
                 .padding()
             }
@@ -39,6 +30,23 @@ struct HomeView: View {
         }
         .task {
             await viewModel.updateLocalUser()
+        }
+    }
+}
+
+extension HomeView {
+    // MARK: - Analytics
+
+    private var analyticsSection: some View {
+        Section {
+            GroupBox {
+                DecisionTimeAnalytics(decisions: viewModel.recentDecisions)
+            }
+
+        } header: {
+            Text("Decision Time Patterns")
+                .font(.headline)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
@@ -116,4 +124,5 @@ struct HomeView: View {
         }
         .frame(maxWidth: .infinity, minHeight: 200)
     }
+    
 }

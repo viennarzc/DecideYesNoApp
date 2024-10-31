@@ -8,206 +8,201 @@
 import SwiftUI
 
 
+// MARK: - Main View
 struct DecisionListMainView: View {
     @StateObject private var viewModel = DecisionListMainViewModel()
-    @Environment(\.colorScheme) var colorScheme
-
-    @State private var isPresentingCreateDecisions: Bool = false
-    @State private var hasSession: Bool = false
-    @State private var isPresentingLoginView: Bool = false
+    @State private var isPresentingCreateDecisions = false
+    @State private var hasSession = false
+    @State private var isPresentingLoginView = false
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                switch viewModel.dataState {
-                case .isFetching:
-                    ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .padding(.top, 40)
-
-                case .populated:
-
-                    if let decisions = viewModel.decisions {
-                        LazyVStack(spacing: 12) {
-                            ForEach(decisions.documents) { decision in
-                                NavigationLink(
-                                    destination: {
-                                        MainDecisionView(
-                                            decision: decision,
-                                            onEvent: { event in
-                                                Task {
-                                                    await viewModel.getDecisions()
-                                                }
-                                            }
-                                        )
-                                    }
-                                ) {
-                                    DecisionCard(decision: decision)
-                                        .tint(.black)
-                                }
-                                .contextMenu {
-                                    Button(role: .destructive) {
-                                        Task {
-                                            await viewModel
-                                                .deleteDecision(id: decision.id)
-                                            
-                                            await viewModel.getDecisions()
-                                        }
-                                        
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                }
-                            }
+                DecisionListContent(
+                    dataState: viewModel.dataState,
+                    decisions: viewModel.decisions?.documents ?? [],
+                    hasSession: hasSession,
+                    onDeleteDecision: { decisionId in
+                        Task {
+                            await viewModel.deleteDecision(id: decisionId)
+                            await viewModel.getDecisions()
                         }
-                        .padding(.horizontal)
-                    }
-                case .error:
-                    Text("Error")
-                case .empty:
-                    if hasSession {
-                        EmptyStateView()
-
-                    } else {
-                        ContentUnavailableView {
-                            Text("Login Required")
-                        } description: {
-                            Text("You must login to able to create, and see the list of decisions")
-                        } actions: {
-                            Button {
-                                isPresentingLoginView = true
-                            } label: {
-                                Text("Login")
-                                    .fontWeight(.bold)
-                            }
-                            .buttonBorderShape(.capsule)
-                            .buttonStyle(BorderedProminentButtonStyle())
-
+                    },
+                    onDecisionUpdate: {
+                        Task {
+                            await viewModel.getDecisions()
                         }
+                    },
+                    onLoginTap: {
+                        isPresentingLoginView = true
                     }
-                }
+                )
             }
             .navigationTitle("Decisions")
             .toolbar {
-                ToolbarItem(placement: .primaryAction) {
-                    Button(action: {
-                        isPresentingCreateDecisions = true
-                    }) {
-                        Image(systemName: "plus.circle.fill")
-                            .imageScale(.large)
-                    }
-                }
+                CreateDecisionButton(isPresenting: $isPresentingCreateDecisions)
             }
         }
-        .sheet(isPresented: $isPresentingCreateDecisions, content: {
+        .sheet(isPresented: $isPresentingCreateDecisions) {
             CreateDecisionView()
-        })
-        .onChange(of: isPresentingCreateDecisions, { oldValue, newValue in
+        }
+        .onChange(of: isPresentingCreateDecisions) { oldValue, newValue in
             if oldValue, !newValue {
                 Task {
                     await viewModel.getDecisions()
                 }
             }
-        })
-        .sheet(isPresented: $isPresentingLoginView, content: {
+        }
+        .sheet(isPresented: $isPresentingLoginView) {
             LoginView(onSuccessLogin: {
                 isPresentingLoginView = false
-                
                 Task {
                     await viewModel.getDecisions()
                 }
             })
-        })
-        .task {
-            await viewModel.getDecisions()
         }
         .task {
+            await viewModel.getDecisions()
             hasSession = await viewModel.getSession() ?? false
         }
     }
 }
 
+// MARK: - Content View
+private struct DecisionListContent: View {
+    let dataState: DecisionListMainViewModel.DataState
+    let decisions: [DecisionModel]
+    let hasSession: Bool
+    let onDeleteDecision: (String) -> Void
+    let onDecisionUpdate: () -> Void
+    let onLoginTap: () -> Void
+    
+    var body: some View {
+        switch dataState {
+        case .isFetching:
+            LoadingView()
+        case .populated:
+            DecisionListView(
+                decisions: decisions,
+                onDeleteDecision: onDeleteDecision,
+                onDecisionUpdate: onDecisionUpdate
+            )
+        case .error:
+            ErrorView()
+        case .empty:
+            EmptyStateContent(
+                hasSession: hasSession,
+                onLoginTap: onLoginTap
+            )
+        }
+    }
+}
+
+// MARK: - List View
+private struct DecisionListView: View {
+    let decisions: [DecisionModel]
+    let onDeleteDecision: (String) -> Void
+    let onDecisionUpdate: () -> Void
+    
+    var body: some View {
+        LazyVStack(spacing: 12) {
+            ForEach(decisions) { decision in
+                DecisionListItem(
+                    decision: decision,
+                    onDelete: {
+                        onDeleteDecision(decision.id)
+                    },
+                    onUpdate: onDecisionUpdate
+                )
+            }
+        }
+        .padding(.horizontal)
+    }
+}
+
+// MARK: - List Item
+private struct DecisionListItem: View {
+    let decision: DecisionModel
+    let onDelete: () -> Void
+    let onUpdate: () -> Void
+    
+    var body: some View {
+        NavigationLink(
+            destination: MainDecisionView(
+                decision: decision,
+                onEvent: { _ in
+                    onUpdate()
+                }
+            )
+        ) {
+            DecisionCard(decision: decision)
+                .tint(.black)
+        }
+        .contextMenu {
+            Button(role: .destructive) {
+                onDelete()
+            } label: {
+                Label("Delete", systemImage: "trash")
+            }
+        }
+    }
+}
+
+// MARK: - Supporting Views
+private struct LoadingView: View {
+    var body: some View {
+        ProgressView()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(.top, 40)
+    }
+}
+
+private struct ErrorView: View {
+    var body: some View {
+        Text("Error")
+    }
+}
+
+private struct EmptyStateContent: View {
+    let hasSession: Bool
+    let onLoginTap: () -> Void
+    
+    var body: some View {
+        if hasSession {
+            EmptyStateView()
+        } else {
+            ContentUnavailableView {
+                Text("Login Required")
+            } description: {
+                Text("You must login to able to create, and see the list of decisions")
+            } actions: {
+                Button(action: onLoginTap) {
+                    Text("Login")
+                        .fontWeight(.bold)
+                }
+                .buttonBorderShape(.capsule)
+                .buttonStyle(.borderedProminent)
+            }
+        }
+    }
+}
+
+private struct CreateDecisionButton: ToolbarContent {
+    @Binding var isPresenting: Bool
+    
+    var body: some ToolbarContent {
+        ToolbarItem(placement: .primaryAction) {
+            Button {
+                isPresenting = true
+            } label: {
+                Image(systemName: "plus.circle.fill")
+                    .imageScale(.large)
+            }
+        }
+    }
+}
+
+// MARK: - Preview
 #Preview {
     DecisionListMainView()
-}
-
-struct DecisionCard: View {
-    let decision: DecisionModel
-    @Environment(\.colorScheme) var colorScheme
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(decision.title)
-                .font(.headline)
-                .foregroundColor(.primary)
-                .lineLimit(2)
-
-            HStack {
-                StatusBadge(status: decision.answerDecisionStatus)
-                Spacer()
-                if let date = decision.createdAt {
-                    Text(
-                        date.formatted(.dateTime.day(.twoDigits)
-                            .month(.wide)
-                            .weekday(.wide)
-                            .hour(.defaultDigits(amPM: .wide)))
-                    )
-                }
-            }
-            .foregroundStyle(.secondary)
-        }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(colorScheme == .dark ? Color(.systemGray6) : .white)
-                .shadow(color: Color(.systemGray4).opacity(0.3), radius: 3, x: 0, y: 1)
-        )
-    }
-}
-
-struct StatusBadge: View {
-    let status: DecisionStatus
-
-    var body: some View {
-        Text(status.rawValue)
-            .font(.caption)
-            .fontWeight(.medium)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 4)
-            .background(
-                Capsule()
-                    .fill(statusColor.opacity(0.2))
-            )
-            .foregroundColor(statusColor)
-    }
-
-    private var statusColor: Color {
-        switch status {
-        case .yes:
-            return .green
-        case .no:
-            return .red
-        case .undecided:
-            return .orange
-        }
-    }
-}
-
-struct EmptyStateView: View {
-    var body: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "square.and.pencil")
-                .font(.system(size: 50))
-                .foregroundColor(.secondary)
-
-            Text("No Decisions Yet")
-                .font(.headline)
-
-            Text("Tap + to add your first decision")
-                .font(.subheadline)
-                .foregroundColor(.secondary)
-        }
-        .padding(.top, 60)
-    }
 }

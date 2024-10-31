@@ -41,6 +41,9 @@
 		8533E10C2CD2694600591B6B /* DecisionHistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E10B2CD2694600591B6B /* DecisionHistoryList.swift */; };
 		8533E10E2CD2EB1500591B6B /* TimeAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E10D2CD2EB1500591B6B /* TimeAnalysis.swift */; };
 		8533E1122CD2F0D400591B6B /* TimeOfDayStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1112CD2F0D400591B6B /* TimeOfDayStat.swift */; };
+		8533E1142CD348D300591B6B /* DecisionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1132CD348D300591B6B /* DecisionCard.swift */; };
+		8533E1162CD348DF00591B6B /* StatusBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1152CD348DF00591B6B /* StatusBadge.swift */; };
+		8533E1182CD348E800591B6B /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8533E1172CD348E800591B6B /* EmptyStateView.swift */; };
 		855149EA2CC9C77B00F50F21 /* DecisionListMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */; };
 		855149EC2CCB102A00F50F21 /* DecisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149EB2CCB102A00F50F21 /* DecisionService.swift */; };
 		855149F12CCB1BE700F50F21 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855149F02CCB1BE700F50F21 /* User.swift */; };
@@ -112,6 +115,9 @@
 		8533E10B2CD2694600591B6B /* DecisionHistoryList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionHistoryList.swift; sourceTree = "<group>"; };
 		8533E10D2CD2EB1500591B6B /* TimeAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAnalysis.swift; sourceTree = "<group>"; };
 		8533E1112CD2F0D400591B6B /* TimeOfDayStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeOfDayStat.swift; sourceTree = "<group>"; };
+		8533E1132CD348D300591B6B /* DecisionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionCard.swift; sourceTree = "<group>"; };
+		8533E1152CD348DF00591B6B /* StatusBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBadge.swift; sourceTree = "<group>"; };
+		8533E1172CD348E800591B6B /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		855149E62CC703D700F50F21 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		855149E92CC9C77B00F50F21 /* DecisionListMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionListMainView.swift; sourceTree = "<group>"; };
 		855149EB2CCB102A00F50F21 /* DecisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionService.swift; sourceTree = "<group>"; };
@@ -295,6 +301,9 @@
 			children = (
 				8533E0EB2CD20FF500591B6B /* DecisionHistoryItemView.swift */,
 				8533E1052CD2676400591B6B /* LoadingButton.swift */,
+				8533E1132CD348D300591B6B /* DecisionCard.swift */,
+				8533E1152CD348DF00591B6B /* StatusBadge.swift */,
+				8533E1172CD348E800591B6B /* EmptyStateView.swift */,
 				8533E0DF2CD0E19700591B6B /* DecisionRow.swift */,
 				8533E0E12CD0E1A700591B6B /* StatCard.swift */,
 			);
@@ -495,10 +504,12 @@
 			files = (
 				8533E0D82CD08BED00591B6B /* SignupView.swift in Sources */,
 				8533E0DE2CD0E18100591B6B /* HomeViewModel.swift in Sources */,
+				8533E1142CD348D300591B6B /* DecisionCard.swift in Sources */,
 				850453ED2CC09E9400885423 /* ContentView.swift in Sources */,
 				85CF27502CC1E9F700D8E831 /* AccountService.swift in Sources */,
 				85AA8B9E2CC4615400E187CE /* AuthService.swift in Sources */,
 				8533E0E02CD0E19700591B6B /* DecisionRow.swift in Sources */,
+				8533E1162CD348DF00591B6B /* StatusBadge.swift in Sources */,
 				8533E0F22CD265EE00591B6B /* CreateDecisionViewModel.swift in Sources */,
 				8533E0EC2CD20FF500591B6B /* DecisionHistoryItemView.swift in Sources */,
 				855149FB2CCB4DE100F50F21 /* CreateDecisionView.swift in Sources */,
@@ -518,6 +529,7 @@
 				85AA8BA42CC46B4600E187CE /* DecisionServiceProtocol.swift in Sources */,
 				8533E10A2CD2694000591B6B /* CreateDecisionHistoryForm.swift in Sources */,
 				8533E0FB2CD2665F00591B6B /* SettingsMainViewModel.swift in Sources */,
+				8533E1182CD348E800591B6B /* EmptyStateView.swift in Sources */,
 				8533E10E2CD2EB1500591B6B /* TimeAnalysis.swift in Sources */,
 				8533E0F82CD2664500591B6B /* MainDecisionViewModel.swift in Sources */,
 				8533E0E62CD1F15A00591B6B /* DecisionHistoryService.swift in Sources */,
